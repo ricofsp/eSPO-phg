@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+backend/node_modules/
+
+# Environment
+.env
+.env.local
+.env.*.local
+backend/.env
+
+# Build
+frontend/dist/
+frontend/build/
+
+# Uploads (file PDF tidak ikut di-push)
+backend/public/uploads/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+.claude/
+
+# IDE
+.vscode/
+.idea/

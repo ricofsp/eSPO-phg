@@ -1,0 +1,220 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CSS VARIABLES
+   Light = :root  |  Dark = html.dark
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+:root {
+  /* Backgrounds */
+  --c-bg:           #E8ECF1;   /* page bg — medium blue-gray, clearly different from white */
+  --c-surface:      #FFFFFF;   /* sidebar, header */
+  --c-card:         #FFFFFF;   /* cards, table */
+  --c-hover:        #F1F5F9;   /* hover state */
+  --c-hover-strong: #E2E8F0;   /* pressed / active-light */
+
+  /* Borders */
+  --c-border:       #E2E8F0;   /* subtle border */
+  --c-border-hover: #CBD5E1;   /* hover border */
+
+  /* Text — Slate-based */
+  --c-text:         #0F172A;   /* heading / primary */
+  --c-text-muted:   #475569;   /* body / secondary */
+  --c-text-faint:   #94A3B8;   /* placeholder / hint */
+
+  /* Elevation shadows */
+  --shadow-sm:  0 1px 2px rgba(15,23,42,0.06);
+  --shadow-md:  0 4px 12px rgba(15,23,42,0.08), 0 1px 3px rgba(15,23,42,0.06);
+  --shadow-lg:  0 16px 48px rgba(15,23,42,0.12), 0 4px 16px rgba(15,23,42,0.06);
+
+  /* Header blur */
+  --c-header-bg: rgba(255,255,255,0.92);
+
+}
+
+html.dark {
+  --c-bg:           #0A0A0A;
+  --c-surface:      #111111;
+  --c-card:         #181818;
+  --c-hover:        #222222;
+  --c-hover-strong: #2A2A2A;
+
+  --c-border:       #2A2A2A;
+  --c-border-hover: #3D3D3D;
+
+  --c-text:         #F1F5F9;
+  --c-text-muted:   #94A3B8;
+  --c-text-faint:   #64748B;
+
+  --shadow-sm:  0 1px 2px rgba(0,0,0,0.4);
+  --shadow-md:  0 4px 12px rgba(0,0,0,0.5), 0 1px 3px rgba(0,0,0,0.4);
+  --shadow-lg:  0 20px 60px rgba(0,0,0,0.8);
+
+  --c-header-bg: rgba(17,17,17,0.92);
+
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BASE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@layer base {
+  * { box-sizing: border-box; }
+
+  html { zoom: 0.9; height: 100%; }
+  body, #root { height: 100%; }
+
+  body {
+    background-color: var(--c-bg);
+    color: var(--c-text);
+    @apply font-sans antialiased;
+    margin: 0;
+  }
+
+  ::-webkit-scrollbar        { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track  { background: transparent; }
+  ::-webkit-scrollbar-thumb  { background: var(--c-border); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--c-border-hover); }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   COMPONENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@layer components {
+
+  /* ── Sidebar item ── */
+  .sidebar-item {
+    @apply flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium
+           cursor-pointer transition-all duration-150 w-full;
+    color: var(--c-text-muted);
+  }
+  .sidebar-item:hover {
+    background-color: var(--c-hover);
+    color: var(--c-text);
+  }
+  .sidebar-item.active {
+    background-color: #F97316;
+    color: #FFFFFF;
+  }
+  .sidebar-item.active:hover {
+    background-color: #EA6B0C;
+    color: #FFFFFF;
+  }
+
+  /* ── Stat card ── */
+  .stat-card {
+    @apply rounded-xl p-5 border transition-all duration-200 cursor-default;
+    background-color: var(--c-card);
+    border-color: var(--c-border);
+    box-shadow: var(--shadow-sm);
+  }
+  .stat-card:hover {
+    border-color: var(--c-border-hover);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+  }
+
+  /* ── Input / Select / Textarea ── */
+  .input-field {
+    @apply w-full rounded-lg px-3 py-2.5 text-sm
+           focus:outline-none
+           transition-all duration-150;
+    background-color: var(--c-card);
+    border: 1.5px solid var(--c-border);
+    color: var(--c-text);
+  }
+  .input-field:focus { border-color: #F97316; box-shadow: 0 0 0 3px rgba(249,115,22,0.12); }
+  .input-field::placeholder { color: var(--c-text-faint); }
+  .input-field:hover:not(:focus) { border-color: var(--c-border-hover); }
+
+  /* ── Buttons ── */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 text-sm font-semibold px-4 py-2.5 rounded-lg
+           transition-all duration-150 cursor-pointer select-none;
+    background-color: #F97316;
+    color: #FFFFFF;
+    box-shadow: 0 1px 2px rgba(249,115,22,0.3);
+  }
+  .btn-primary:hover {
+    background-color: #EA6B0C;
+    box-shadow: 0 4px 12px rgba(249,115,22,0.35);
+    transform: translateY(-1px);
+  }
+  .btn-primary:active { transform: translateY(0); }
+  .btn-primary:disabled { opacity: 0.55; cursor: not-allowed; transform: none; box-shadow: none; }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 text-sm font-medium px-4 py-2.5 rounded-lg
+           border transition-all duration-150 cursor-pointer select-none;
+    background-color: var(--c-card);
+    border-color: var(--c-border);
+    color: var(--c-text-muted);
+    box-shadow: var(--shadow-sm);
+  }
+  .btn-secondary:hover {
+    background-color: var(--c-hover);
+    border-color: var(--c-border-hover);
+    color: var(--c-text);
+  }
+
+  .btn-danger {
+    @apply inline-flex items-center gap-2 text-sm font-medium px-3 py-1.5 rounded-lg
+           transition-all duration-150 cursor-pointer select-none;
+    background-color: rgba(239,68,68,0.08);
+    border: 1px solid rgba(239,68,68,0.2);
+    color: #EF4444;
+  }
+  .btn-danger:hover {
+    background-color: rgba(239,68,68,0.15);
+    border-color: rgba(239,68,68,0.35);
+  }
+
+  /* ── Status badges ── */
+  .badge-aktif {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold;
+    background-color: rgba(22,163,74,0.1);
+    color: #16A34A;
+    border: 1px solid rgba(22,163,74,0.2);
+  }
+  html.dark .badge-aktif {
+    background-color: rgba(34,197,94,0.12);
+    color: #4ADE80;
+    border-color: rgba(34,197,94,0.2);
+  }
+
+  .badge-pending {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold;
+    background-color: rgba(217,119,6,0.1);
+    color: #D97706;
+    border: 1px solid rgba(217,119,6,0.2);
+  }
+  html.dark .badge-pending {
+    background-color: rgba(251,191,36,0.1);
+    color: #FBBF24;
+    border-color: rgba(251,191,36,0.2);
+  }
+
+  .badge-arsip {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold;
+    background-color: var(--c-hover);
+    color: var(--c-text-faint);
+    border: 1px solid var(--c-border);
+  }
+
+  /* ── Table ── */
+  .table-row {
+    border-bottom: 1px solid var(--c-border);
+    transition: background-color 0.1s;
+  }
+  .table-row:last-child { border-bottom: none; }
+  .table-row:hover { background-color: var(--c-hover); }
+
+  .table-th {
+    @apply px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider;
+    color: var(--c-text-faint);
+  }
+  .table-td {
+    @apply px-4 py-3.5 text-sm;
+    color: var(--c-text-muted);
+  }
+}
