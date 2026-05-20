@@ -6,7 +6,7 @@ import { hospitalService } from '../services/api';
 import Modal from '../components/ui/Modal';
 import Button from '../components/ui/Button';
 
-const EMPTY = { kode: '', nama: '', direktur: '', direktur_email: '', is_active: 1 };
+const EMPTY = { kode: '', singkatan: '', nama: '', direktur: '', direktur_email: '', is_active: 1 };
 
 export default function HospitalsPage() {
   const { data, pagination, loading, error, filters, create, update, remove, setPage, setSearch, refetch } = useTable(hospitalService);
@@ -19,7 +19,7 @@ export default function HospitalsPage() {
   const [form,         setForm]         = useState(EMPTY);
 
   const openCreate = () => { setForm(EMPTY); setEditTarget(null); setFormOpen(true); };
-  const openEdit   = (row) => { setForm({ kode: row.kode, nama: row.nama, direktur: row.direktur || '', direktur_email: row.direktur_email || '', is_active: row.is_active }); setEditTarget(row); setFormOpen(true); };
+  const openEdit   = (row) => { setForm({ kode: row.kode, singkatan: row.singkatan || '', nama: row.nama, direktur: row.direktur || '', direktur_email: row.direktur_email || '', is_active: row.is_active }); setEditTarget(row); setFormOpen(true); };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -86,6 +86,7 @@ export default function HospitalsPage() {
           <thead>
             <tr style={{ background: 'var(--c-hover)', borderBottom: '1px solid var(--c-border)' }}>
               <th className="table-th">Kode</th>
+              <th className="table-th">Singkatan</th>
               <th className="table-th">Nama Rumah Sakit</th>
               <th className="table-th">Direktur</th>
               <th className="table-th">Email Direktur</th>
@@ -95,14 +96,15 @@ export default function HospitalsPage() {
           </thead>
           <tbody>
             {loading && (
-              <tr><td colSpan={6} className="table-td text-center text-ink-faint py-10">Memuat data...</td></tr>
+              <tr><td colSpan={7} className="table-td text-center text-ink-faint py-10">Memuat data...</td></tr>
             )}
             {!loading && data.length === 0 && (
-              <tr><td colSpan={6} className="table-td text-center text-ink-faint py-10">Belum ada data</td></tr>
+              <tr><td colSpan={7} className="table-td text-center text-ink-faint py-10">Belum ada data</td></tr>
             )}
             {!loading && data.map((row) => (
               <tr key={row.id} className="table-row">
                 <td className="table-td font-mono text-sm font-semibold text-ink">{row.kode}</td>
+                <td className="table-td text-sm text-ink-muted">{row.singkatan || '-'}</td>
                 <td className="table-td">
                   <div className="flex items-center gap-2">
                     <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(249,115,22,0.1)', color: '#F97316' }}>
@@ -148,10 +150,14 @@ export default function HospitalsPage() {
       {/* Form Modal */}
       <Modal open={formOpen} onClose={() => setFormOpen(false)} title={editTarget ? 'Edit Rumah Sakit' : 'Tambah Rumah Sakit'} size="md">
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-3 gap-4">
             <div>
               <label className="text-xs font-semibold text-ink-faint uppercase tracking-wide block mb-1.5">Kode <span className="text-red-500">*</span></label>
               <input {...field('kode')} required placeholder="RSU-001" className="input-field w-full" style={{ textTransform: 'uppercase' }} />
+            </div>
+            <div>
+              <label className="text-xs font-semibold text-ink-faint uppercase tracking-wide block mb-1.5">Singkatan</label>
+              <input {...field('singkatan')} placeholder="RSUPN" className="input-field w-full" />
             </div>
             <div>
               <label className="text-xs font-semibold text-ink-faint uppercase tracking-wide block mb-1.5">Status</label>

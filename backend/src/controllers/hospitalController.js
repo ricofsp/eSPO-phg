@@ -41,12 +41,12 @@ const getOne = async (req, res) => {
 
 const create = async (req, res) => {
   try {
-    const { kode, nama, direktur, direktur_email, is_active } = req.body;
+    const { kode, singkatan, nama, direktur, direktur_email, is_active } = req.body;
     if (!kode || !nama) return res.status(400).json({ message: 'Kode dan nama wajib diisi' });
 
     const [result] = await pool.query(
-      'INSERT INTO hospitals (kode, nama, direktur, direktur_email, is_active, created_by) VALUES (?, ?, ?, ?, ?, ?)',
-      [kode.trim().toUpperCase(), nama.trim(), direktur || null, direktur_email || null, is_active ?? 1, req.user.id]
+      'INSERT INTO hospitals (kode, singkatan, nama, direktur, direktur_email, is_active, created_by) VALUES (?, ?, ?, ?, ?, ?, ?)',
+      [kode.trim().toUpperCase(), singkatan?.trim() || null, nama.trim(), direktur || null, direktur_email || null, is_active ?? 1, req.user.id]
     );
     const [[row]] = await pool.query('SELECT * FROM hospitals WHERE id = ?', [result.insertId]);
     res.status(201).json(row);
@@ -58,13 +58,13 @@ const create = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    const { kode, nama, direktur, direktur_email, is_active } = req.body;
+    const { kode, singkatan, nama, direktur, direktur_email, is_active } = req.body;
     const [[check]] = await pool.query('SELECT id FROM hospitals WHERE id = ? AND deleted_at IS NULL', [req.params.id]);
     if (!check) return res.status(404).json({ message: 'Rumah sakit tidak ditemukan' });
 
     await pool.query(
-      'UPDATE hospitals SET kode=?, nama=?, direktur=?, direktur_email=?, is_active=?, updated_by=? WHERE id=?',
-      [kode.trim().toUpperCase(), nama.trim(), direktur || null, direktur_email || null, is_active ?? 1, req.user.id, req.params.id]
+      'UPDATE hospitals SET kode=?, singkatan=?, nama=?, direktur=?, direktur_email=?, is_active=?, updated_by=? WHERE id=?',
+      [kode.trim().toUpperCase(), singkatan?.trim() || null, nama.trim(), direktur || null, direktur_email || null, is_active ?? 1, req.user.id, req.params.id]
     );
     const [[row]] = await pool.query('SELECT * FROM hospitals WHERE id = ?', [req.params.id]);
     res.json(row);
