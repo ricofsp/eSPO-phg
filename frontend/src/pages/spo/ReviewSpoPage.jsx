@@ -33,7 +33,7 @@ export default function ReviewSpoPage() {
   return (
     <div className="space-y-3">
       <div>
-        <h1 className="text-lg font-bold" style={{ color: 'var(--c-text)' }}>Review & Approval SPO</h1>
+        <h1 className="text-xl font-bold text-ink font-display">Review & Approval SPO</h1>
         <p className="text-xs mt-0.5" style={{ color: 'var(--c-text-muted)' }}>
           {ROLE_LABELS[user?.role] || 'SPO yang memerlukan tindakan Anda'}
         </p>

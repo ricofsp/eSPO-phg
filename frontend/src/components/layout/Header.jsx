@@ -1,16 +1,39 @@
 import { useState, useRef, useEffect } from 'react';
 import { Search, ChevronRight, LogOut, ChevronDown, Sun, Moon } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
-import { useNav } from '../../context/NavigationContext';
 import toast from 'react-hot-toast';
 
-const PAGE_LABEL = { dashboard: 'Overview', documents: 'Dokumen' };
+const ROUTE_MAP = {
+  '/dashboard':         { section: 'Dashboard',    label: 'Overview' },
+  '/documents':         { section: 'SPO',          label: 'Dokumen SPO' },
+  '/formulir':          { section: 'Formulir',     label: 'Daftar Formulir' },
+  '/formulir/review':   { section: 'Formulir',     label: 'Review Formulir' },
+  '/formulir/baru':     { section: 'Formulir',     label: 'Pengajuan Baru' },
+  '/pengajuan':         { section: 'Pengajuan',    label: 'Pengajuan' },
+  '/spo/review':        { section: 'SPO',          label: 'Review SPO' },
+  '/spo/release-queue': { section: 'SPO',          label: 'Rilis SPO' },
+  '/spo/template':      { section: 'SPO',          label: 'Template SPO' },
+  '/hospitals':         { section: 'Master Data',  label: 'Rumah Sakit' },
+  '/divisions':         { section: 'Master Data',  label: 'Divisi' },
+  '/users':             { section: 'Master Data',  label: 'Users' },
+};
+
+function getRouteInfo(pathname) {
+  if (ROUTE_MAP[pathname]) return ROUTE_MAP[pathname];
+  if (pathname.startsWith('/formulir/') && pathname.endsWith('/design'))
+    return { section: 'Formulir', label: 'Upload Design' };
+  if (pathname.startsWith('/formulir/')) return { section: 'Formulir', label: 'Detail Formulir' };
+  if (pathname.startsWith('/spo/'))      return { section: 'SPO',      label: 'Detail SPO' };
+  return { section: 'Dashboard', label: 'Overview' };
+}
 
 export default function Header() {
   const { user, logout } = useAuth();
   const { dark, toggle } = useTheme();
-  const { page } = useNav();
+  const { pathname } = useLocation();
+  const { section, label } = getRouteInfo(pathname);
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -40,9 +63,9 @@ export default function Header() {
     >
       {/* Breadcrumb */}
       <div className="flex items-center gap-2 text-sm">
-        <span className="font-display" style={{ color: 'var(--c-text-faint)' }}>Dashboard</span>
+        <span className="font-display" style={{ color: 'var(--c-text-faint)' }}>{section}</span>
         <ChevronRight size={13} style={{ color: 'var(--c-text-faint)' }} />
-        <span className="font-semibold font-display" style={{ color: 'var(--c-text)' }}>{PAGE_LABEL[page] ?? page}</span>
+        <span className="font-semibold font-display" style={{ color: 'var(--c-text)' }}>{label}</span>
       </div>
 
       {/* Right */}

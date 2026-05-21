@@ -62,7 +62,7 @@ export default function ReleaseQueuePage() {
   return (
     <div className="space-y-3">
       <div>
-        <h1 className="text-lg font-bold" style={{ color: 'var(--c-text)' }}>Rilis SPO</h1>
+        <h1 className="text-xl font-bold text-ink font-display">Rilis SPO</h1>
         <p className="text-xs mt-0.5" style={{ color: 'var(--c-text-muted)' }}>
           SPO yang telah disetujui CEO dan siap diterbitkan ke RS
         </p>

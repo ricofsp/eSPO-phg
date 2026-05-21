@@ -89,7 +89,7 @@ export default function TemplateSpoPage() {
     <div className="space-y-3">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-lg font-bold" style={{ color: 'var(--c-text)' }}>Template SPO</h1>
+          <h1 className="text-xl font-bold text-ink font-display">Template SPO</h1>
           <p className="text-xs mt-0.5" style={{ color: 'var(--c-text-muted)' }}>
             Kelola template SPO yang dapat diunduh oleh pengaju
           </p>
