@@ -94,7 +94,7 @@ export default function PengajuanBaruPage() {
               className="input-field w-full pr-8"
             />
             {unique === 'checking' && (
-              <span className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 border-2 border-[#F97316] border-t-transparent rounded-full animate-spin" />
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 border-2 border-[#015c80] border-t-transparent rounded-full animate-spin" />
             )}
             {unique === 'ok' && <CheckCircle size={15} className="absolute right-3 top-1/2 -translate-y-1/2 text-green-500" />}
             {unique === 'exists' && <AlertCircle size={15} className="absolute right-3 top-1/2 -translate-y-1/2 text-red-500" />}
@@ -129,7 +129,7 @@ export default function PengajuanBaruPage() {
             <div className="flex items-center justify-between gap-3 px-4 py-3 rounded-xl border"
               style={{ borderColor:'var(--c-border)', background:'var(--c-hover)' }}>
               <div className="flex items-center gap-2">
-                <FileText size={16} style={{ color:'#F97316' }} />
+                <FileText size={16} style={{ color:'#015c80' }} />
                 <div>
                   <p className="text-sm font-medium text-ink">{file.name}</p>
                   <p className="text-xs text-ink-faint">{(file.size/1024).toFixed(0)} KB</p>
@@ -146,10 +146,10 @@ export default function PengajuanBaruPage() {
               onDrop={e => { e.preventDefault(); setDragOver(false); if(e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]); }}
               onClick={() => fileRef.current?.click()}
               className="flex flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed cursor-pointer transition-all py-8"
-              style={{ borderColor: dragOver ? '#F97316' : 'var(--c-border)', background: dragOver ? 'rgba(249,115,22,0.04)' : 'var(--c-hover)' }}
+              style={{ borderColor: dragOver ? '#015c80' : 'var(--c-border)', background: dragOver ? 'rgba(1,92,128,0.04)' : 'var(--c-hover)' }}
             >
-              <UploadCloud size={24} style={{ color: dragOver ? '#F97316' : 'var(--c-text-faint)' }} />
-              <p className="text-sm text-ink-muted">Drag & drop atau <span style={{ color:'#F97316' }} className="font-semibold">pilih file</span></p>
+              <UploadCloud size={24} style={{ color: dragOver ? '#015c80' : 'var(--c-text-faint)' }} />
+              <p className="text-sm text-ink-muted">Drag & drop atau <span style={{ color:'#015c80' }} className="font-semibold">pilih file</span></p>
               <p className="text-xs text-ink-faint">PDF, DOC, DOCX · Maks 10 MB</p>
             </div>
           )}

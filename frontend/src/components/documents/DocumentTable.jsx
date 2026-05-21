@@ -123,7 +123,7 @@ export default function DocumentTable({
                       <td className="table-td">
                         <button type="button" onClick={() => onEdit(doc)} title="Edit"
                           className="flex items-center justify-center transition-all rounded-md cursor-pointer w-7 h-7 text-ink-faint"
-                          onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(249,115,22,0.1)"; e.currentTarget.style.color = "#F97316"; }}
+                          onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(1,92,128,0.1)"; e.currentTarget.style.color = "#015c80"; }}
                           onMouseLeave={(e) => { e.currentTarget.style.background = ""; e.currentTarget.style.color = ""; }}
                         >
                           <Pencil size={13} />
@@ -138,7 +138,7 @@ export default function DocumentTable({
                           title={doc.nama_dokumen}
                           className="flex items-center justify-center w-8 h-8 mx-auto transition-all border rounded-md cursor-pointer"
                           style={{ borderColor: "var(--c-border)", color: "var(--c-text-muted)" }}
-                          onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(249,115,22,0.08)"; e.currentTarget.style.color = "#F97316"; e.currentTarget.style.borderColor = "#F97316"; }}
+                          onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(1,92,128,0.08)"; e.currentTarget.style.color = "#015c80"; e.currentTarget.style.borderColor = "#015c80"; }}
                           onMouseLeave={(e) => { e.currentTarget.style.background = ""; e.currentTarget.style.color = ""; e.currentTarget.style.borderColor = ""; }}
                         >
                           <Eye size={13} />
@@ -157,7 +157,7 @@ export default function DocumentTable({
                         {doc.judul || <span className="text-sm italic text-ink-faint">—</span>}
                       </span>
                       {isAdmin && aktifDate && (
-                        <span className="text-xs mt-0.5 block" style={{ color: "#F97316" }}>
+                        <span className="text-xs mt-0.5 block" style={{ color: "#015c80" }}>
                           {formatDateTime(aktifDate)}{aktifOleh ? ` oleh ${aktifOleh}` : ""}
                         </span>
                       )}
@@ -250,9 +250,9 @@ export default function DocumentTable({
                     style={
                       p === page
                         ? {
-                            background: "#F97316",
+                            background: "#015c80",
                             color: "#FFF",
-                            boxShadow: "0 2px 8px rgba(249,115,22,0.35)",
+                            boxShadow: "0 2px 8px rgba(1,92,128,0.35)",
                           }
                         : { color: "var(--c-text-muted)" }
                     }

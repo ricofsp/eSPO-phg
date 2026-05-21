@@ -84,7 +84,7 @@ export default function DocumentViewerPage() {
   if (loading) return (
     <div className="min-h-screen flex items-center justify-center" style={{ background: bg }}>
       <div className="text-center">
-        <div className="w-10 h-10 border-2 border-[#F97316] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+        <div className="w-10 h-10 border-2 border-[#015c80] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
         <p className="text-sm" style={{ color: textMuted }}>Memuat dokumen...</p>
       </div>
     </div>
@@ -95,7 +95,7 @@ export default function DocumentViewerPage() {
       <div className="text-center">
         <FileText size={40} className="mx-auto mb-3" style={{ color: textMuted }} />
         <p className="font-medium mb-1" style={{ color: textMain }}>{error || 'File tidak tersedia'}</p>
-        <button onClick={() => window.close()} className="text-[#F97316] text-sm mt-2 cursor-pointer hover:underline">
+        <button onClick={() => window.close()} className="text-[#015c80] text-sm mt-2 cursor-pointer hover:underline">
           Tutup Tab
         </button>
       </div>
@@ -116,8 +116,8 @@ export default function DocumentViewerPage() {
         {/* Doc info */}
         <div className="flex items-center gap-2 flex-1 min-w-0">
           <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
-            style={{ background: 'rgba(249,115,22,0.15)' }}>
-            <FileText size={13} style={{ color: '#F97316' }} />
+            style={{ background: 'rgba(1,92,128,0.15)' }}>
+            <FileText size={13} style={{ color: '#015c80' }} />
           </div>
           <div className="min-w-0">
             <p className="text-sm font-semibold truncate" style={{ color: textMain }}>{doc.judul}</p>
@@ -174,7 +174,7 @@ export default function DocumentViewerPage() {
         {/* Badge pemilik */}
         {doc.pemilik && (
           <span className="text-xs px-2.5 py-1 rounded-full font-medium flex-shrink-0"
-            style={{ background: 'rgba(249,115,22,0.15)', color: '#FB923C' }}>
+            style={{ background: 'rgba(1,92,128,0.15)', color: '#2a7fa0' }}>
             {doc.pemilik}
           </span>
         )}
@@ -188,7 +188,7 @@ export default function DocumentViewerPage() {
           onLoadError={() => setError('Gagal memuat file PDF')}
           loading={
             <div className="flex flex-col items-center gap-3 mt-20">
-              <div className="w-8 h-8 border-2 border-[#F97316] border-t-transparent rounded-full animate-spin" />
+              <div className="w-8 h-8 border-2 border-[#015c80] border-t-transparent rounded-full animate-spin" />
               <p className="text-sm" style={{ color: textMuted }}>Memuat halaman...</p>
             </div>
           }
@@ -212,7 +212,7 @@ export default function DocumentViewerPage() {
             <button key={p} onClick={() => setPage(p)}
               className="w-7 h-7 text-xs font-medium rounded-md transition-all cursor-pointer"
               style={p === page
-                ? { background: '#F97316', color: '#fff' }
+                ? { background: '#015c80', color: '#fff' }
                 : { color: textMuted, background: 'transparent' }
               }>
               {p}

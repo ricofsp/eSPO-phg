@@ -170,11 +170,11 @@ export default function PengajuanSpoPage() {
             onDragLeave={() => setDragging(false)}
             onDrop={onDrop}
             style={{
-              border: `2px dashed ${dragging ? '#F97316' : 'var(--c-border)'}`,
+              border: `2px dashed ${dragging ? '#015c80' : 'var(--c-border)'}`,
               borderRadius: 0,
               padding: '24px 16px',
               textAlign: 'center',
-              background: dragging ? 'rgba(249,115,22,0.04)' : 'transparent',
+              background: dragging ? 'rgba(1,92,128,0.04)' : 'transparent',
               cursor: 'pointer',
               transition: 'all 0.15s',
             }}
@@ -192,7 +192,7 @@ export default function PengajuanSpoPage() {
               <>
                 <Upload size={24} className="mx-auto mb-2" style={{ color: 'var(--c-text-faint)' }} />
                 <p className="text-sm" style={{ color: 'var(--c-text-muted)' }}>
-                  Drag & drop atau <span style={{ color: '#F97316', fontWeight: 600 }}>klik untuk pilih file</span>
+                  Drag & drop atau <span style={{ color: '#015c80', fontWeight: 600 }}>klik untuk pilih file</span>
                 </p>
                 <p className="text-xs mt-1" style={{ color: 'var(--c-text-faint)' }}>PDF, DOC, DOCX — maks. 10 MB</p>
               </>
@@ -215,7 +215,7 @@ export default function PengajuanSpoPage() {
               Kadiv RS Reviewer <span style={{ color: '#EF4444' }}>*</span>
             </span>
             {selected.length > 0 && (
-              <span className="ml-auto text-xs font-semibold" style={{ color: '#F97316' }}>
+              <span className="ml-auto text-xs font-semibold" style={{ color: '#015c80' }}>
                 {selected.length} dipilih
               </span>
             )}
@@ -245,7 +245,7 @@ export default function PengajuanSpoPage() {
                         className="flex-shrink-0"
                       >
                         {allSel
-                          ? <CheckSquare size={14} style={{ color: '#F97316' }} />
+                          ? <CheckSquare size={14} style={{ color: '#015c80' }} />
                           : <Square size={14} style={{ color: 'var(--c-text-faint)' }} />
                         }
                       </button>
@@ -263,7 +263,7 @@ export default function PengajuanSpoPage() {
                               type="checkbox"
                               checked={selected.includes(m.id)}
                               onChange={() => toggleKadiv(m.id)}
-                              className="accent-orange-500"
+                              className="accent-[#015c80]"
                             />
                             <div>
                               <p className="text-xs font-medium" style={{ color: 'var(--c-text)' }}>{m.nama}</p>

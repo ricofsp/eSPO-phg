@@ -122,7 +122,7 @@ export default function DaftarFormulirPage() {
                       <a href={filePath} target="_blank" rel="noreferrer"
                         className="w-8 h-8 flex items-center justify-center rounded-md border mx-auto transition-all cursor-pointer"
                         style={{ borderColor:'var(--c-border)', color:'var(--c-text-muted)' }}
-                        onMouseEnter={e => { e.currentTarget.style.background='rgba(249,115,22,0.08)'; e.currentTarget.style.color='#F97316'; e.currentTarget.style.borderColor='#F97316'; }}
+                        onMouseEnter={e => { e.currentTarget.style.background='rgba(1,92,128,0.08)'; e.currentTarget.style.color='#015c80'; e.currentTarget.style.borderColor='#015c80'; }}
                         onMouseLeave={e => { e.currentTarget.style.background=''; e.currentTarget.style.color=''; e.currentTarget.style.borderColor=''; }}
                         title={fileName}>
                         <Eye size={13} />
@@ -137,7 +137,7 @@ export default function DaftarFormulirPage() {
                     <button onClick={() => navigate(`/formulir/${row.id}`)}
                       className="w-7 h-7 flex items-center justify-center rounded-md border transition-all cursor-pointer mx-auto"
                       style={{ borderColor:'var(--c-border)', color:'var(--c-text-muted)' }}
-                      onMouseEnter={e => { e.currentTarget.style.background='rgba(249,115,22,0.08)'; e.currentTarget.style.color='#F97316'; e.currentTarget.style.borderColor='#F97316'; }}
+                      onMouseEnter={e => { e.currentTarget.style.background='rgba(1,92,128,0.08)'; e.currentTarget.style.color='#015c80'; e.currentTarget.style.borderColor='#015c80'; }}
                       onMouseLeave={e => { e.currentTarget.style.background=''; e.currentTarget.style.color=''; e.currentTarget.style.borderColor=''; }}
                       title="Lihat detail & proses approval">
                       <ExternalLink size={12} />
@@ -162,7 +162,7 @@ export default function DaftarFormulirPage() {
                   ? <span key={`e${i}`} className="w-7 h-7 flex items-center justify-center text-xs text-ink-faint">…</span>
                   : <button key={p} onClick={() => setPagination(prev=>({...prev,page:p}))}
                       className="w-7 h-7 flex items-center justify-center rounded-md text-xs font-semibold transition-all cursor-pointer"
-                      style={p===pagination.page ? {background:'#F97316',color:'#fff'} : {color:'var(--c-text-muted)'}}>
+                      style={p===pagination.page ? {background:'#015c80',color:'#fff'} : {color:'var(--c-text-muted)'}}>
                       {p}
                     </button>
                 )

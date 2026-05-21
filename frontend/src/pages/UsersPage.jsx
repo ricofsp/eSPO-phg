@@ -132,7 +132,7 @@ export default function UsersPage() {
               <tr key={row.id} className="table-row">
                 <td className="table-td">
                   <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs font-bold" style={{ background: 'linear-gradient(135deg, #F97316, #EA6B0C)' }}>
+                    <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs font-bold" style={{ background: 'linear-gradient(135deg, #015c80, #014d6b)' }}>
                       {row.nama?.[0]?.toUpperCase()}
                     </div>
                     <div>
@@ -143,7 +143,7 @@ export default function UsersPage() {
                 </td>
                 <td className="table-td text-ink-muted text-sm">{row.email}</td>
                 <td className="table-td">
-                  <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${row.role === 'admin' ? 'bg-[#FED7AA] text-[#F97316]' : 'bg-blue-50 text-blue-600'}`}>
+                  <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${row.role === 'admin' ? 'bg-[#7fb8cc] text-[#015c80]' : 'bg-blue-50 text-blue-600'}`}>
                     {row.role}
                   </span>
                 </td>
@@ -171,7 +171,7 @@ export default function UsersPage() {
             <span className="text-ink-faint">Total: {pagination.total} pengguna</span>
             <div className="flex items-center gap-1">
               {Array.from({ length: pagination.totalPages }, (_, i) => i + 1).map((p) => (
-                <button key={p} onClick={() => setPage(p)} className={`w-7 h-7 rounded-md text-xs font-medium transition-all ${p === pagination.page ? 'bg-[#F97316] text-white' : 'text-ink-muted hover:bg-[var(--c-hover)]'}`}>{p}</button>
+                <button key={p} onClick={() => setPage(p)} className={`w-7 h-7 rounded-md text-xs font-medium transition-all ${p === pagination.page ? 'bg-[#015c80] text-white' : 'text-ink-muted hover:bg-[var(--c-hover)]'}`}>{p}</button>
               ))}
             </div>
           </div>
@@ -238,7 +238,7 @@ export default function UsersPage() {
               <div className="flex items-center gap-3">
                 <button type="button"
                   onClick={() => setForm((f) => ({ ...f, divisi_id: divisions.map((d) => d.id) }))}
-                  className="text-xs font-medium cursor-pointer transition-colors" style={{ color: '#F97316' }}>
+                  className="text-xs font-medium cursor-pointer transition-colors" style={{ color: '#015c80' }}>
                   Pilih semua
                 </button>
                 {form.divisi_id.length > 0 && (
@@ -257,7 +257,7 @@ export default function UsersPage() {
                   <button key={d.id} type="button" onClick={() => toggleDivisi(d.id)}
                     className="text-xs px-2.5 py-1 rounded-full font-medium transition-all cursor-pointer"
                     style={active
-                      ? { background: '#F97316', color: '#fff', boxShadow: '0 2px 6px rgba(249,115,22,0.3)' }
+                      ? { background: '#015c80', color: '#fff', boxShadow: '0 2px 6px rgba(1,92,128,0.3)' }
                       : { background: 'var(--c-card)', color: 'var(--c-text-muted)', border: '1px solid var(--c-border)' }
                     }>
                     {d.kode}

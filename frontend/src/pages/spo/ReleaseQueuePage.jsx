@@ -150,7 +150,7 @@ export default function ReleaseQueuePage() {
                   type="checkbox"
                   checked={selectedRs.length === hospitals.length && hospitals.length > 0}
                   onChange={() => selectedRs.length === hospitals.length ? setSelectedRs([]) : selectAll()}
-                  className="accent-orange-500"
+                  className="accent-[#015c80]"
                 />
                 <span className="text-xs font-semibold" style={{ color: 'var(--c-text)' }}>
                   Pilih Semua RS ({hospitals.length})
@@ -172,19 +172,19 @@ export default function ReleaseQueuePage() {
                   return (
                     <label key={h.id} className="flex items-center gap-2.5 px-3 py-2.5 cursor-pointer transition-colors"
                       style={{
-                        border: `1px solid ${checked ? 'rgba(249,115,22,0.4)' : 'var(--c-border)'}`,
-                        background: checked ? 'rgba(249,115,22,0.06)' : 'var(--c-card)',
+                        border: `1px solid ${checked ? 'rgba(1,92,128,0.4)' : 'var(--c-border)'}`,
+                        background: checked ? 'rgba(1,92,128,0.06)' : 'var(--c-card)',
                       }}>
                       <input
                         type="checkbox"
                         checked={checked}
                         onChange={() => toggleRs(h.id)}
-                        className="accent-orange-500 flex-shrink-0"
+                        className="accent-[#015c80] flex-shrink-0"
                       />
                       <div className="min-w-0">
                         <p className="text-xs font-medium truncate" style={{ color: 'var(--c-text)' }}>{h.nama}</p>
                         {h.singkatan && (
-                          <p className="text-xs font-mono" style={{ color: checked ? '#F97316' : 'var(--c-text-faint)' }}>
+                          <p className="text-xs font-mono" style={{ color: checked ? '#015c80' : 'var(--c-text-faint)' }}>
                             {h.singkatan}
                           </p>
                         )}

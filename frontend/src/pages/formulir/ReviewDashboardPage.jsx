@@ -53,9 +53,9 @@ export default function ReviewDashboardPage() {
 
       {data.length > 0 && !loading && (
         <div className="flex items-center gap-2 px-4 py-3 rounded-xl border"
-          style={{ background:'rgba(249,115,22,0.04)', borderColor:'rgba(249,115,22,0.2)' }}>
-          <ClipboardCheck size={15} style={{ color:'#F97316' }} />
-          <p className="text-sm" style={{ color:'#EA6B0C' }}>
+          style={{ background:'rgba(1,92,128,0.04)', borderColor:'rgba(1,92,128,0.2)' }}>
+          <ClipboardCheck size={15} style={{ color:'#015c80' }} />
+          <p className="text-sm" style={{ color:'#014d6b' }}>
             <strong>{data.length}</strong> formulir menunggu tindakan Anda
           </p>
         </div>
@@ -99,9 +99,9 @@ export default function ReviewDashboardPage() {
                 <td className="table-td" onClick={e => e.stopPropagation()}>
                   <button onClick={() => navigate(`/formulir/${row.id}`)}
                     className="text-xs px-3 py-1.5 rounded-lg font-semibold cursor-pointer transition-all text-white"
-                    style={{ background:'#F97316' }}
-                    onMouseEnter={e => e.currentTarget.style.background='#EA6B0C'}
-                    onMouseLeave={e => e.currentTarget.style.background='#F97316'}>
+                    style={{ background:'#015c80' }}
+                    onMouseEnter={e => e.currentTarget.style.background='#014d6b'}
+                    onMouseLeave={e => e.currentTarget.style.background='#015c80'}>
                     Review
                   </button>
                 </td>

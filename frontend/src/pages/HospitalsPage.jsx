@@ -107,7 +107,7 @@ export default function HospitalsPage() {
                 <td className="table-td text-sm text-ink-muted">{row.singkatan || '-'}</td>
                 <td className="table-td">
                   <div className="flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(249,115,22,0.1)', color: '#F97316' }}>
+                    <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(1,92,128,0.1)', color: '#015c80' }}>
                       <Building2 size={13} />
                     </div>
                     <span className="font-medium text-ink">{row.nama}</span>
@@ -140,7 +140,7 @@ export default function HospitalsPage() {
             <span className="text-ink-faint">Total: {pagination.total} data</span>
             <div className="flex items-center gap-1">
               {Array.from({ length: pagination.totalPages }, (_, i) => i + 1).map((p) => (
-                <button key={p} onClick={() => setPage(p)} className={`w-7 h-7 rounded-md text-xs font-medium transition-all ${p === pagination.page ? 'bg-[#F97316] text-white' : 'text-ink-muted hover:bg-[var(--c-hover)]'}`}>{p}</button>
+                <button key={p} onClick={() => setPage(p)} className={`w-7 h-7 rounded-md text-xs font-medium transition-all ${p === pagination.page ? 'bg-[#015c80] text-white' : 'text-ink-muted hover:bg-[var(--c-hover)]'}`}>{p}</button>
               ))}
             </div>
           </div>

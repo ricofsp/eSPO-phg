@@ -119,8 +119,8 @@ export default function DashboardPage() {
   const totalTren = chartData.reduce((s, d) => s + d.masuk + d.keluar, 0);
 
   const STATS = [
-    { label: 'Total Dokumen', value: '1,024', sub: '+0.94 bulan lalu', icon: FileText,   color: '#F97316', bg: 'rgba(249,115,22,0.10)'    },
-    { label: 'Surat Masuk',   value: '428',   sub: '+0.94 bulan lalu', icon: TrendingUp, color: '#FB923C', bg: 'rgba(249,115,22,0.10)'   },
+    { label: 'Total Dokumen', value: '1,024', sub: '+0.94 bulan lalu', icon: FileText,   color: '#015c80', bg: 'rgba(1,92,128,0.10)'    },
+    { label: 'Surat Masuk',   value: '428',   sub: '+0.94 bulan lalu', icon: TrendingUp, color: '#2a7fa0', bg: 'rgba(1,92,128,0.10)'   },
     { label: 'Pending',       value: '86',    sub: '+0.94 bulan lalu', icon: Clock,      color: '#D97706', bg: 'rgba(217,119,6,0.10)'   },
     { label: 'Diarsipkan',    value: '312',   sub: '+0.94 bulan lalu', icon: Archive,    color: '#64748B', bg: 'rgba(100,116,139,0.10)' },
   ];
@@ -183,11 +183,11 @@ export default function DashboardPage() {
                 <p className="text-2xl font-bold text-ink font-display">{totalTren.toLocaleString()}</p>
                 <div className="flex items-center gap-3 text-xs text-ink-muted">
                   <span className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full" style={{ background: '#F97316', display: 'inline-block' }} />
+                    <span className="w-2 h-2 rounded-full" style={{ background: '#015c80', display: 'inline-block' }} />
                     Surat Masuk
                   </span>
                   <span className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full" style={{ background: '#FED7AA', display: 'inline-block' }} />
+                    <span className="w-2 h-2 rounded-full" style={{ background: '#7fb8cc', display: 'inline-block' }} />
                     Surat Keluar
                   </span>
                 </div>
@@ -215,8 +215,8 @@ export default function DashboardPage() {
                 <YAxis axisLine={false} tickLine={false} width={28}
                   tick={{ fill: 'var(--c-text-faint)', fontSize: 11, fontFamily: 'Inter' }} />
                 <Tooltip content={<ChartTooltip />} cursor={{ fill: 'var(--c-hover)', radius: 4 }} />
-                <Bar dataKey="masuk"  fill="#F97316" shape={<BlockBar />} />
-                <Bar dataKey="keluar" fill="#FED7AA" shape={<BlockBar />} />
+                <Bar dataKey="masuk"  fill="#015c80" shape={<BlockBar />} />
+                <Bar dataKey="keluar" fill="#7fb8cc" shape={<BlockBar />} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -252,7 +252,7 @@ export default function DashboardPage() {
                 <Tooltip content={<ChartTooltip />} cursor={{ fill: 'var(--c-hover)', radius: 4 }} />
                 <Bar dataKey="value" radius={[3, 3, 0, 0]}>
                   {DISTRIBUSI.map((_, i) => (
-                    <Cell key={i} fill={i % 2 === 0 ? '#F97316' : '#FED7AA'} />
+                    <Cell key={i} fill={i % 2 === 0 ? '#015c80' : '#7fb8cc'} />
                   ))}
                 </Bar>
               </BarChart>
@@ -286,7 +286,7 @@ export default function DashboardPage() {
         <table className="w-full" style={{ minWidth: 700 }}>
           <thead>
             <tr style={{ background: 'var(--c-hover)', borderBottom: '1px solid var(--c-border)' }}>
-              <th className="table-th w-10"><input type="checkbox" className="rounded cursor-pointer accent-[#F97316]" /></th>
+              <th className="table-th w-10"><input type="checkbox" className="rounded cursor-pointer accent-[#015c80]" /></th>
               <th className="table-th">ID</th>
               <th className="table-th">No. Dokumen</th>
               <th className="table-th">Judul</th>
@@ -299,7 +299,7 @@ export default function DashboardPage() {
           <tbody>
             {RECENT.map((doc) => (
               <tr key={doc.id} className="table-row">
-                <td className="table-td"><input type="checkbox" className="rounded cursor-pointer accent-[#F97316]" /></td>
+                <td className="table-td"><input type="checkbox" className="rounded cursor-pointer accent-[#015c80]" /></td>
                 <td className="table-td"><span className="font-mono text-xs text-ink-faint">#{doc.id}</span></td>
                 <td className="table-td font-semibold text-ink">{doc.nomor}</td>
                 <td className="table-td max-w-[220px]"><span className="block truncate text-ink">{doc.judul}</span></td>

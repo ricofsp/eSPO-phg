@@ -32,11 +32,11 @@ export default function LoginPage() {
       {/* Decorative blobs */}
       <div
         className="absolute -top-32 -right-32 w-96 h-96 rounded-full opacity-[0.07] pointer-events-none"
-        style={{ background: 'radial-gradient(circle, #F97316, transparent)' }}
+        style={{ background: 'radial-gradient(circle, #015c80, transparent)' }}
       />
       <div
         className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full opacity-[0.05] pointer-events-none"
-        style={{ background: 'radial-gradient(circle, #F97316, transparent)' }}
+        style={{ background: 'radial-gradient(circle, #015c80, transparent)' }}
       />
 
       <div className="w-full max-w-[400px] relative z-10 animate-slide-up">
@@ -46,14 +46,14 @@ export default function LoginPage() {
           style={{ background: 'var(--c-card)', borderColor: 'var(--c-border)', boxShadow: 'var(--shadow-lg)' }}
         >
           {/* Accent bar */}
-          <div className="h-1 bg-gradient-to-r from-[#FB923C] via-[#F97316] to-[#013D56]" />
+          <div className="h-1 bg-gradient-to-r from-[#2a7fa0] via-[#015c80] to-[#013D56]" />
 
           <div className="px-8 py-8">
             {/* Brand */}
             <div className="flex flex-col items-center mb-7">
               <div
                 className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
-                style={{ background: 'linear-gradient(135deg, #FB923C, #F97316)', boxShadow: '0 8px 20px rgba(249,115,22,0.3)' }}
+                style={{ background: 'linear-gradient(135deg, #2a7fa0, #015c80)', boxShadow: '0 8px 20px rgba(1,92,128,0.3)' }}
               >
                 <FileText size={22} className="text-white" />
               </div>

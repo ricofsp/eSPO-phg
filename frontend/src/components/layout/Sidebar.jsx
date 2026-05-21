@@ -86,12 +86,12 @@ export default function Sidebar({ collapsed, onToggle }) {
         style={{
           height: 56, padding: '0 14px',
           borderBottom: '1px solid var(--c-border)',
-          background: 'linear-gradient(135deg, rgba(249,115,22,0.06) 0%, transparent 100%)',
+          background: 'linear-gradient(135deg, rgba(1,92,128,0.06) 0%, transparent 100%)',
         }}
       >
         <div
           className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-          style={{ background: 'linear-gradient(135deg, #FB923C, #F97316)' }}
+          style={{ background: 'linear-gradient(135deg, #2a7fa0, #015c80)' }}
         >
           <FileText size={15} className="text-white" />
         </div>
@@ -123,7 +123,7 @@ export default function Sidebar({ collapsed, onToggle }) {
           color: 'var(--c-text-faint)',
           boxShadow: 'var(--shadow-sm)',
         }}
-        onMouseEnter={(e) => { e.currentTarget.style.background = '#F97316'; e.currentTarget.style.borderColor = '#F97316'; e.currentTarget.style.color = '#fff'; }}
+        onMouseEnter={(e) => { e.currentTarget.style.background = '#015c80'; e.currentTarget.style.borderColor = '#015c80'; e.currentTarget.style.color = '#fff'; }}
         onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--c-card)'; e.currentTarget.style.borderColor = 'var(--c-border)'; e.currentTarget.style.color = 'var(--c-text-faint)'; }}
       >
         {collapsed ? <ChevronRight size={12} /> : <ChevronLeft size={12} />}
@@ -213,7 +213,7 @@ export default function Sidebar({ collapsed, onToggle }) {
         <div className="flex items-center gap-2">
           <div
             className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs font-bold"
-            style={{ background: 'linear-gradient(135deg, #F97316, #EA6B0C)' }}
+            style={{ background: 'linear-gradient(135deg, #015c80, #014d6b)' }}
           >
             {user?.nama?.[0]?.toUpperCase() || 'U'}
           </div>

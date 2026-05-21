@@ -105,7 +105,7 @@ export default function DivisionsPage() {
                 <td className="table-td font-mono text-sm font-semibold text-ink">{row.kode}</td>
                 <td className="table-td">
                   <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 rounded-md flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(249,115,22,0.1)', color: '#F97316' }}>
+                    <div className="w-6 h-6 rounded-md flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(1,92,128,0.1)', color: '#015c80' }}>
                       <GitBranch size={12} />
                     </div>
                     <span className="font-medium text-ink">{row.nama}</span>
@@ -136,7 +136,7 @@ export default function DivisionsPage() {
             <span className="text-ink-faint">Total: {pagination.total} data</span>
             <div className="flex items-center gap-1">
               {Array.from({ length: pagination.totalPages }, (_, i) => i + 1).map((p) => (
-                <button key={p} onClick={() => setPage(p)} className={`w-7 h-7 rounded-md text-xs font-medium transition-all ${p === pagination.page ? 'bg-[#F97316] text-white' : 'text-ink-muted hover:bg-[var(--c-hover)]'}`}>{p}</button>
+                <button key={p} onClick={() => setPage(p)} className={`w-7 h-7 rounded-md text-xs font-medium transition-all ${p === pagination.page ? 'bg-[#015c80] text-white' : 'text-ink-muted hover:bg-[var(--c-hover)]'}`}>{p}</button>
               ))}
             </div>
           </div>

@@ -71,7 +71,7 @@ export default function DetailFormulirPage() {
 
   if (loading) return (
     <div className="flex items-center justify-center h-64">
-      <div className="w-8 h-8 border-2 border-[#F97316] border-t-transparent rounded-full animate-spin" />
+      <div className="w-8 h-8 border-2 border-[#015c80] border-t-transparent rounded-full animate-spin" />
     </div>
   );
   if (!formulir) return <div className="text-center py-20 text-ink-faint">Formulir tidak ditemukan</div>;
@@ -153,18 +153,18 @@ export default function DetailFormulirPage() {
               <div key={step} className="flex items-center">
                 <div className="flex flex-col items-center gap-1.5">
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all ${
-                    done ? 'bg-green-500 text-white' : active ? 'text-white ring-4 ring-[#FED7AA]' : 'bg-gray-100 text-gray-400'
+                    done ? 'bg-green-500 text-white' : active ? 'text-white ring-4 ring-[#7fb8cc]' : 'bg-gray-100 text-gray-400'
                   } ${active ? 'animate-pulse' : ''}`}
-                    style={active ? { background:'#F97316' } : {}}>
+                    style={active ? { background:'#015c80' } : {}}>
                     {done ? '✓' : i + 1}
                   </div>
-                  <span className="text-xs font-semibold whitespace-nowrap" style={{ color: done ? '#16A34A' : active ? '#F97316' : 'var(--c-text-faint)' }}>
+                  <span className="text-xs font-semibold whitespace-nowrap" style={{ color: done ? '#16A34A' : active ? '#015c80' : 'var(--c-text-faint)' }}>
                     {STEP_LABELS[step]}
                   </span>
                   {histItem && (
                     <div className="flex flex-col items-center gap-0.5">
                       <span className="text-2xs text-ink-faint whitespace-nowrap">{fmt(histItem.created_at)}</span>
-                      {histItem.actor_nama && <span className="text-2xs font-medium whitespace-nowrap" style={{ color: done ? '#16A34A' : '#F97316' }}>{histItem.actor_nama}</span>}
+                      {histItem.actor_nama && <span className="text-2xs font-medium whitespace-nowrap" style={{ color: done ? '#16A34A' : '#015c80' }}>{histItem.actor_nama}</span>}
                     </div>
                   )}
                 </div>
@@ -186,7 +186,7 @@ export default function DetailFormulirPage() {
             {[['info','Info'],['drafts','Draft Versi'],['history','Riwayat']].map(([k,l]) => (
               <button key={k} onClick={() => setTab(k)}
                 className="flex-1 py-2 rounded-lg text-sm font-medium transition-all cursor-pointer"
-                style={tab===k ? { background:'#F97316', color:'#fff', boxShadow:'0 2px 8px rgba(249,115,22,0.3)' } : { color:'var(--c-text-muted)' }}>
+                style={tab===k ? { background:'#015c80', color:'#fff', boxShadow:'0 2px 8px rgba(1,92,128,0.3)' } : { color:'var(--c-text-muted)' }}>
                 {l}
               </button>
             ))}
@@ -218,7 +218,7 @@ export default function DetailFormulirPage() {
               ) : f.drafts.map((d) => (
                 <div key={d.id} className="flex items-center justify-between px-5 py-4 border-b last:border-0" style={{ borderColor:'var(--c-border)' }}>
                   <div className="flex items-center gap-3">
-                    <span className="text-xs font-bold px-2 py-1 rounded-full" style={{ background:'rgba(249,115,22,0.1)', color:'#F97316' }}>v{d.version}</span>
+                    <span className="text-xs font-bold px-2 py-1 rounded-full" style={{ background:'rgba(1,92,128,0.1)', color:'#015c80' }}>v{d.version}</span>
                     <div>
                       <p className="text-sm font-medium text-ink">{d.file_name}</p>
                       <p className="text-xs text-ink-faint">{d.uploader_nama} · {fmt(d.created_at)} · {d.uploaded_role}</p>
@@ -226,9 +226,9 @@ export default function DetailFormulirPage() {
                   </div>
                   <a href={d.file_path} target="_blank" rel="noreferrer"
                     className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg transition-all cursor-pointer"
-                    style={{ background:'rgba(249,115,22,0.08)', color:'#F97316' }}
-                    onMouseEnter={e => e.currentTarget.style.background='rgba(249,115,22,0.15)'}
-                    onMouseLeave={e => e.currentTarget.style.background='rgba(249,115,22,0.08)'}>
+                    style={{ background:'rgba(1,92,128,0.08)', color:'#015c80' }}
+                    onMouseEnter={e => e.currentTarget.style.background='rgba(1,92,128,0.15)'}
+                    onMouseLeave={e => e.currentTarget.style.background='rgba(1,92,128,0.08)'}>
                     <Download size={11} /> Unduh
                   </a>
                 </div>
@@ -303,7 +303,7 @@ export default function DetailFormulirPage() {
                             </div>
                             <span className="text-xs text-ink-faint flex-shrink-0 mt-1">{fmt(h.created_at)}</span>
                           </div>
-                          {h.comment && <div className="mt-2 px-3 py-2 rounded-lg text-xs text-ink-muted" style={{ background:'var(--c-hover)', borderLeft:'3px solid #F97316' }}>{h.comment}</div>}
+                          {h.comment && <div className="mt-2 px-3 py-2 rounded-lg text-xs text-ink-muted" style={{ background:'var(--c-hover)', borderLeft:'3px solid #015c80' }}>{h.comment}</div>}
                         </div>
                       </div>
                     );
@@ -384,7 +384,7 @@ export default function DetailFormulirPage() {
                   <form onSubmit={doResubmit} className="space-y-2">
                     <label className="flex items-center gap-2 px-3 py-2 rounded-lg border cursor-pointer text-sm transition-all"
                       style={{ borderColor:'var(--c-border)', background:'var(--c-hover)' }}
-                      onMouseEnter={e => e.currentTarget.style.borderColor='#F97316'}
+                      onMouseEnter={e => e.currentTarget.style.borderColor='#015c80'}
                       onMouseLeave={e => e.currentTarget.style.borderColor='var(--c-border)'}>
                       <UploadCloud size={14} className="text-ink-faint flex-shrink-0" />
                       <span className="text-ink-muted truncate">{resubFile ? resubFile.name : 'Pilih file baru...'}</span>
@@ -395,7 +395,7 @@ export default function DetailFormulirPage() {
                       placeholder="Catatan (opsional)" className="input-field w-full text-xs" />
                     <button type="submit" disabled={!resubFile || resubbing}
                       className="w-full py-2 rounded-xl text-sm font-semibold text-white cursor-pointer transition-all"
-                      style={{ background: resubFile ? '#F97316' : '#9CA3AF' }}>
+                      style={{ background: resubFile ? '#015c80' : '#9CA3AF' }}>
                       {resubbing ? 'Mengirim...' : 'Kirim Ulang'}
                     </button>
                   </form>

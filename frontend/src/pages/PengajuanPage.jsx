@@ -36,7 +36,7 @@ export default function PengajuanPage() {
     <div className="animate-fade-in">
       {/* Tab selector — tarik ke atas sejajar dengan padding layout */}
       {tabs.length > 1 && (
-        <div className="flex gap-0" style={{ borderBottom: '2px solid var(--c-border)', marginBottom: 12, marginTop: -16 }}>
+        <div className="flex gap-0" style={{ borderBottom: '2px solid var(--c-border)', marginBottom: 12, marginTop: 8 }}>
           {tabs.map(t => (
             <button
               key={t.key}
@@ -44,8 +44,8 @@ export default function PengajuanPage() {
               onClick={() => setTab(t.key)}
               className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold transition-all cursor-pointer"
               style={{
-                color:       tab === t.key ? '#F97316' : 'var(--c-text-muted)',
-                borderBottom: tab === t.key ? '2px solid #F97316' : '2px solid transparent',
+                color:       tab === t.key ? '#015c80' : 'var(--c-text-muted)',
+                borderBottom: tab === t.key ? '2px solid #015c80' : '2px solid transparent',
                 marginBottom: -2,
                 background:  'none',
               }}

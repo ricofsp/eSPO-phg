@@ -99,14 +99,14 @@ export default function DocumentForm({ open, onClose, onSubmit, initialData, div
               onClick={() => setTab(i)}
               className="flex-1 flex items-center justify-center gap-1.5 text-xs font-semibold py-2 rounded-lg transition-all cursor-pointer"
               style={tab === i
-                ? { background: 'var(--c-card)', color: '#F97316', boxShadow: 'var(--shadow-sm)' }
+                ? { background: 'var(--c-card)', color: '#015c80', boxShadow: 'var(--shadow-sm)' }
                 : { color: 'var(--c-text-muted)' }
               }
             >
               {t.icon}
               {t.label}
               {t.badge ? (
-                <span className="text-xs font-bold px-1.5 py-0.5 rounded-full" style={{ background: '#F97316', color: '#fff', fontSize: '10px' }}>{t.badge}</span>
+                <span className="text-xs font-bold px-1.5 py-0.5 rounded-full" style={{ background: '#015c80', color: '#fff', fontSize: '10px' }}>{t.badge}</span>
               ) : null}
             </button>
           ))}
@@ -167,7 +167,7 @@ export default function DocumentForm({ open, onClose, onSubmit, initialData, div
               {file ? (
                 <div className="flex items-center justify-between gap-3 px-4 py-3 rounded-xl border" style={{ borderColor: 'var(--c-border)', background: 'var(--c-hover)' }}>
                   <div className="flex items-center gap-2">
-                    <FileText size={16} style={{ color: '#F97316' }} />
+                    <FileText size={16} style={{ color: '#015c80' }} />
                     <div>
                       <p className="text-sm font-medium text-ink">{file.name}</p>
                       <p className="text-xs text-ink-faint">{(file.size / 1024).toFixed(0)} KB</p>
@@ -182,10 +182,10 @@ export default function DocumentForm({ open, onClose, onSubmit, initialData, div
                   onDrop={handleDrop}
                   onClick={() => fileRef.current?.click()}
                   className="flex flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed cursor-pointer transition-all py-6"
-                  style={{ borderColor: dragOver ? '#F97316' : 'var(--c-border)', background: dragOver ? 'rgba(249,115,22,0.04)' : 'var(--c-hover)' }}
+                  style={{ borderColor: dragOver ? '#015c80' : 'var(--c-border)', background: dragOver ? 'rgba(1,92,128,0.04)' : 'var(--c-hover)' }}
                 >
-                  <UploadCloud size={22} style={{ color: dragOver ? '#F97316' : 'var(--c-text-faint)' }} />
-                  <p className="text-sm text-ink-muted">Drag & drop atau <span style={{ color: '#F97316' }} className="font-semibold">pilih file</span></p>
+                  <UploadCloud size={22} style={{ color: dragOver ? '#015c80' : 'var(--c-text-faint)' }} />
+                  <p className="text-sm text-ink-muted">Drag & drop atau <span style={{ color: '#015c80' }} className="font-semibold">pilih file</span></p>
                   <p className="text-xs text-ink-faint">PDF, DOC, DOCX · Maks 20 MB</p>
                 </div>
               )}
@@ -220,7 +220,7 @@ export default function DocumentForm({ open, onClose, onSubmit, initialData, div
               <div className="flex items-center gap-3">
                 <button type="button"
                   onClick={() => setForm((f) => ({ ...f, divisi_id: (divisions || []).map((d) => d.kode) }))}
-                  className="text-xs font-medium transition-colors cursor-pointer" style={{ color: '#F97316' }}>
+                  className="text-xs font-medium transition-colors cursor-pointer" style={{ color: '#015c80' }}>
                   Pilih semua
                 </button>
                 {form.divisi_id.length > 0 && (
@@ -241,7 +241,7 @@ export default function DocumentForm({ open, onClose, onSubmit, initialData, div
                     onClick={() => toggleDivisi(d.kode)}
                     className="text-xs px-2.5 py-1 rounded-full font-medium transition-all cursor-pointer"
                     style={active
-                      ? { background: '#F97316', color: '#fff', boxShadow: '0 2px 6px rgba(249,115,22,0.3)' }
+                      ? { background: '#015c80', color: '#fff', boxShadow: '0 2px 6px rgba(1,92,128,0.3)' }
                       : { background: 'var(--c-card)', color: 'var(--c-text-muted)', border: '1px solid var(--c-border)' }
                     }
                   >

@@ -1,4 +1,4 @@
-﻿import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Search, ChevronRight, LogOut, ChevronDown, Sun, Moon } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
@@ -30,36 +30,41 @@ export default function Header() {
 
   return (
     <header
-      className="h-14 border-b sticky top-0 z-20 flex items-center justify-between px-6 backdrop-blur-sm"
-      style={{ background: 'var(--c-header-bg)', borderColor: 'var(--c-border)' }}
+      className="h-14 sticky top-0 z-20 flex items-center justify-between px-6"
+      style={{
+        background: 'var(--c-header-bg)',
+        borderBottom: '1px solid var(--c-border)',
+        backdropFilter: 'blur(8px)',
+        boxShadow: 'var(--shadow-sm)',
+      }}
     >
       {/* Breadcrumb */}
       <div className="flex items-center gap-2 text-sm">
-        <span className="text-ink-faint font-display">Dashboard</span>
-        <ChevronRight size={13} className="text-ink-faint" />
-        <span className="font-semibold font-display" style={{ color: '#F97316' }}>{PAGE_LABEL[page] ?? page}</span>
+        <span className="font-display" style={{ color: 'var(--c-text-faint)' }}>Dashboard</span>
+        <ChevronRight size={13} style={{ color: 'var(--c-text-faint)' }} />
+        <span className="font-semibold font-display" style={{ color: 'var(--c-text)' }}>{PAGE_LABEL[page] ?? page}</span>
       </div>
 
       {/* Right */}
       <div className="flex items-center gap-2">
         {/* Search */}
         <div className="relative hidden md:flex items-center">
-          <Search size={14} className="absolute left-3 text-ink-faint pointer-events-none" />
+          <Search size={14} className="absolute left-3 pointer-events-none" style={{ color: 'var(--c-text-faint)' }} />
           <input
             type="text"
             placeholder="Cari..."
             className="rounded-lg pl-9 pr-10 py-1.5 text-sm focus:outline-none w-44 transition-all border"
             style={{
-              background: 'var(--c-hover)',
+              background: 'var(--c-card)',
               borderColor: 'var(--c-border)',
               color: 'var(--c-text)',
             }}
-            onFocus={(e) => { e.target.style.background = 'var(--c-card)'; e.target.style.borderColor = '#F97316'; e.target.style.boxShadow = '0 0 0 3px rgba(249,115,22,0.12)'; }}
-            onBlur={(e)  => { e.target.style.background = 'var(--c-hover)'; e.target.style.borderColor = 'var(--c-border)'; e.target.style.boxShadow = 'none'; }}
+            onFocus={(e) => { e.target.style.borderColor = '#015c80'; e.target.style.boxShadow = '0 0 0 3px rgba(1,92,128,0.12)'; }}
+            onBlur={(e)  => { e.target.style.borderColor = 'var(--c-border)'; e.target.style.boxShadow = 'none'; }}
           />
           <kbd
             className="absolute right-2.5 text-2xs rounded px-1 py-0.5 font-mono select-none"
-            style={{ color: 'var(--c-text-faint)', background: 'var(--c-card)', border: '1px solid var(--c-border)' }}
+            style={{ color: 'var(--c-text-faint)', background: 'var(--c-hover)', border: '1px solid var(--c-border)' }}
           >⌘K</kbd>
         </div>
 
@@ -69,12 +74,9 @@ export default function Header() {
           onClick={toggle}
           title={dark ? 'Ganti ke Light Mode' : 'Ganti ke Dark Mode'}
           className="w-8 h-8 flex items-center justify-center rounded-lg border transition-all duration-150 cursor-pointer hover:scale-105"
-          style={{ background: 'var(--c-hover)', borderColor: 'var(--c-border)', color: 'var(--c-text-muted)' }}
+          style={{ background: 'var(--c-card)', borderColor: 'var(--c-border)', color: 'var(--c-text-muted)' }}
         >
-          {dark
-            ? <Sun size={15} className="text-[#F97316]" />
-            : <Moon size={15} className="text-slate-500" />
-          }
+          {dark ? <Sun size={15} /> : <Moon size={15} />}
         </button>
 
         {/* Profile dropdown */}
@@ -85,19 +87,19 @@ export default function Header() {
             className="flex items-center gap-2 pl-1 pr-3 py-1.5 rounded-lg border transition-all duration-150 cursor-pointer"
             style={{
               background: open ? 'var(--c-hover)' : 'transparent',
-              borderColor: open ? 'var(--c-border)' : 'transparent',
+              borderColor: open ? 'var(--c-border-hover)' : 'transparent',
             }}
             onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--c-hover)'; e.currentTarget.style.borderColor = 'var(--c-border)'; }}
             onMouseLeave={(e) => { if (!open) { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = 'transparent'; } }}
           >
-            <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#FB923C] to-[#F97316] flex items-center justify-center flex-shrink-0 shadow-sm">
+            <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#2a7fa0] to-[#015c80] flex items-center justify-center flex-shrink-0 shadow-sm">
               <span className="text-xs font-bold text-white">{initials}</span>
             </div>
-            <span className="hidden md:block text-sm font-medium text-ink">{user?.nama || 'Admin'}</span>
+            <span className="hidden md:block text-sm font-medium" style={{ color: 'var(--c-text)' }}>{user?.nama || 'Admin'}</span>
             <ChevronDown
               size={13}
-              className="text-ink-faint transition-transform duration-200"
-              style={{ transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }}
+              className="transition-transform duration-200"
+              style={{ color: 'var(--c-text-faint)', transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }}
             />
           </button>
 
@@ -107,14 +109,15 @@ export default function Header() {
               style={{ background: 'var(--c-card)', borderColor: 'var(--c-border)', boxShadow: 'var(--shadow-lg)' }}
             >
               <div className="px-4 py-3.5 border-b" style={{ borderColor: 'var(--c-border)' }}>
-                <p className="text-sm font-semibold text-ink truncate">{user?.nama}</p>
-                <p className="text-xs text-ink-faint truncate mt-0.5">{user?.email}</p>
+                <p className="text-sm font-semibold truncate" style={{ color: 'var(--c-text)' }}>{user?.nama}</p>
+                <p className="text-xs truncate mt-0.5" style={{ color: 'var(--c-text-faint)' }}>{user?.email}</p>
               </div>
               <div className="p-1.5">
                 <button
                   type="button"
                   onClick={handleLogout}
-                  className="flex items-center gap-2.5 w-full px-3 py-2 rounded-lg text-sm transition-all duration-150 cursor-pointer text-ink-muted"
+                  className="flex items-center gap-2.5 w-full px-3 py-2 rounded-lg text-sm transition-all duration-150 cursor-pointer"
+                  style={{ color: 'var(--c-text-muted)' }}
                   onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(239,68,68,0.08)'; e.currentTarget.style.color = '#EF4444'; }}
                   onMouseLeave={(e) => { e.currentTarget.style.background = ''; e.currentTarget.style.color = ''; }}
                 >

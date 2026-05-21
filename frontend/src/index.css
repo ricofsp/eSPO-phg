@@ -95,12 +95,12 @@ html.dark {
     color: var(--c-text);
   }
   .sidebar-item.active {
-    background-color: #F97316;
-    border-left-color: #EA6B0C;
+    background-color: #015c80;
+    border-left-color: #014d6b;
     color: #FFFFFF;
   }
   .sidebar-item.active:hover {
-    background-color: #EA6B0C;
+    background-color: #014d6b;
     color: #FFFFFF;
   }
 
@@ -126,7 +126,7 @@ html.dark {
     border: 1.5px solid var(--c-border);
     color: var(--c-text);
   }
-  .input-field:focus { border-color: #F97316; box-shadow: 0 0 0 3px rgba(249,115,22,0.12); }
+  .input-field:focus { border-color: #015c80; box-shadow: 0 0 0 3px rgba(1,92,128,0.12); }
   .input-field::placeholder { color: var(--c-text-faint); }
   .input-field:hover:not(:focus) { border-color: var(--c-border-hover); }
 
@@ -134,13 +134,13 @@ html.dark {
   .btn-primary {
     @apply inline-flex items-center gap-2 text-sm font-semibold px-4 py-2.5 rounded
            transition-all duration-150 cursor-pointer select-none;
-    background-color: #F97316;
+    background-color: #015c80;
     color: #FFFFFF;
-    box-shadow: 0 1px 2px rgba(249,115,22,0.3);
+    box-shadow: 0 1px 2px rgba(1,92,128,0.3);
   }
   .btn-primary:hover {
-    background-color: #EA6B0C;
-    box-shadow: 0 4px 12px rgba(249,115,22,0.35);
+    background-color: #014d6b;
+    box-shadow: 0 4px 12px rgba(1,92,128,0.35);
     transform: translateY(-1px);
   }
   .btn-primary:active { transform: translateY(0); }
@@ -214,7 +214,8 @@ html.dark {
 
   .table-th {
     @apply px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider;
-    color: var(--c-text-faint);
+    background-color: #015c80;
+    color: rgba(255,255,255,0.85);
   }
   .table-td {
     @apply px-4 py-3.5 text-sm;

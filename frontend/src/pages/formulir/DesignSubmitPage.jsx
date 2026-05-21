@@ -14,7 +14,7 @@ function FileSlot({ code, file, onChange, onClear }) {
         <div className="flex items-center justify-between gap-2 px-3 py-2.5 rounded-lg border"
           style={{ borderColor:'var(--c-border)', background:'var(--c-hover)' }}>
           <div className="flex items-center gap-2 min-w-0">
-            <FileText size={13} style={{ color:'#F97316', flexShrink:0 }} />
+            <FileText size={13} style={{ color:'#015c80', flexShrink:0 }} />
             <span className="text-xs text-ink truncate">{file.name}</span>
             <span className="text-2xs text-ink-faint flex-shrink-0">
               {file.name.split('.').pop().toUpperCase()}
@@ -27,11 +27,11 @@ function FileSlot({ code, file, onChange, onClear }) {
       ) : (
         <label
           className="flex flex-col items-center justify-center gap-1 rounded-lg border-2 border-dashed cursor-pointer transition-all py-5"
-          style={{ borderColor: drag ? '#F97316' : 'var(--c-border)', background: drag ? 'rgba(249,115,22,0.04)' : 'transparent' }}
+          style={{ borderColor: drag ? '#015c80' : 'var(--c-border)', background: drag ? 'rgba(1,92,128,0.04)' : 'transparent' }}
           onDragOver={e => { e.preventDefault(); setDrag(true); }}
           onDragLeave={() => setDrag(false)}
           onDrop={e => { e.preventDefault(); setDrag(false); if(e.dataTransfer.files[0]) onChange(e.dataTransfer.files[0]); }}>
-          <UploadCloud size={18} style={{ color: drag ? '#F97316' : 'var(--c-text-faint)' }} />
+          <UploadCloud size={18} style={{ color: drag ? '#015c80' : 'var(--c-text-faint)' }} />
           <span className="text-xs text-ink-faint">Klik atau drop file</span>
           <span className="text-2xs text-ink-faint">PDF / DOC / DOCX</span>
           <input type="file" accept=".pdf,.doc,.docx" className="hidden"
@@ -82,7 +82,7 @@ export default function DesignSubmitPage() {
 
   if (loading) return (
     <div className="flex items-center justify-center h-64">
-      <div className="w-8 h-8 border-2 border-[#F97316] border-t-transparent rounded-full animate-spin" />
+      <div className="w-8 h-8 border-2 border-[#015c80] border-t-transparent rounded-full animate-spin" />
     </div>
   );
 
@@ -106,7 +106,7 @@ export default function DesignSubmitPage() {
         </div>
         <div className="w-full h-2 rounded-full overflow-hidden" style={{ background:'var(--c-hover)' }}>
           <div className="h-full rounded-full transition-all duration-300"
-            style={{ width:`${(uploadedCount/RS_CODES.length)*100}%`, background:'#F97316' }} />
+            style={{ width:`${(uploadedCount/RS_CODES.length)*100}%`, background:'#015c80' }} />
         </div>
       </div>
 

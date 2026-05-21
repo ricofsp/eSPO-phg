@@ -29,7 +29,6 @@ export default function PengajuanSayaSpoPage() {
   // Data for form
   const [divisions, setDivisions]   = useState([]);
   const [kadivList, setKadivList]   = useState([]);
-  const [templates, setTemplates]   = useState([]);
   const [selected, setSelected]     = useState([]);   // kadiv reviewer IDs
   const [groupOpen, setGroupOpen]   = useState({});
   const [saving, setSaving]         = useState(false);
@@ -56,23 +55,20 @@ export default function PengajuanSayaSpoPage() {
     setModalOpen(true);
 
     try {
-      const [divRes, kadivRes, tplRes] = await Promise.all([
+      const [divRes, kadivRes] = await Promise.all([
         divisionService.getAll({ limit: 500 }),
         spoService.getKadivRs({ rs_id: user?.hospital_id }),
-        spoService.getTemplates(),
       ]);
       setDivisions(divRes.data?.data || divRes.data || []);
       const kd = kadivRes.data;
       setKadivList(Array.isArray(kd) ? kd : (kd?.data || []));
-      const tpl = tplRes.data;
-      setTemplates(Array.isArray(tpl) ? tpl : (tpl || []));
     } catch { /* ignore */ }
   }
 
   // Kadiv grouped by divisi, filtered to selected hak_akses
   const filteredKadiv = form.hak_akses.length > 0
     ? kadivList.filter(k => form.hak_akses.includes(k.divisi_kode))
-    : kadivList;
+    : [];
 
   const grouped = filteredKadiv.reduce((acc, k) => {
     const key = k.divisi_nama || 'Tanpa Divisi';
@@ -87,11 +83,11 @@ export default function PengajuanSayaSpoPage() {
       const newHak = f.hak_akses.includes(kode)
         ? f.hak_akses.filter(k => k !== kode)
         : [...f.hak_akses, kode];
-      // Auto-select kadivs whose divisi_kode is in newHak
-      const autoSelected = kadivList
-        .filter(k => newHak.includes(k.divisi_kode))
-        .map(k => k.id);
-      setSelected(autoSelected);
+      // Hapus reviewer yang divisinya tidak lagi dipilih
+      setSelected(prev => prev.filter(id => {
+        const k = kadivList.find(k => k.id === id);
+        return k && newHak.includes(k.divisi_kode);
+      }));
       return { ...f, hak_akses: newHak };
     });
   }
@@ -99,7 +95,6 @@ export default function PengajuanSayaSpoPage() {
   function selectAllHakAkses() {
     const allKodes = divisions.map(d => d.kode);
     setForm(f => ({ ...f, hak_akses: allKodes }));
-    setSelected(kadivList.map(k => k.id));
   }
 
   function toggleKadiv(id) {
@@ -126,8 +121,7 @@ export default function PengajuanSayaSpoPage() {
     return e;
   }
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  async function handleSubmit() {
     const errs = validate();
     if (Object.keys(errs).length) {
       setErrors(errs);
@@ -208,15 +202,15 @@ export default function PengajuanSayaSpoPage() {
               <tr key={row.id} className="table-row">
                 <td className="table-td text-xs text-center text-ink-faint">{idx + 1}</td>
                 <td className="table-td font-medium text-ink">{row.judul}</td>
-                <td className="table-td text-xs font-mono text-ink-muted">{row.nomor_dokumen}</td>
+                <td className="table-td text-sm text-ink-muted">{row.nomor_dokumen}</td>
                 <td className="table-td"><StatusBadge status={row.workflow_status} /></td>
                 <td className="table-td text-sm text-ink-muted whitespace-nowrap">{fmtDate(row.submitted_at || row.created_at)}</td>
                 <td className="table-td text-center">
                   <button onClick={() => navigate(`/spo/${row.id}`)}
                     className="text-xs px-2 py-1 rounded-md transition-all cursor-pointer"
-                    style={{ background: 'rgba(249,115,22,0.08)', color: '#F97316' }}
-                    onMouseEnter={e => e.currentTarget.style.background = 'rgba(249,115,22,0.15)'}
-                    onMouseLeave={e => e.currentTarget.style.background = 'rgba(249,115,22,0.08)'}>
+                    style={{ background: 'rgba(1,92,128,0.08)', color: '#015c80' }}
+                    onMouseEnter={e => e.currentTarget.style.background = 'rgba(1,92,128,0.15)'}
+                    onMouseLeave={e => e.currentTarget.style.background = 'rgba(1,92,128,0.08)'}>
                     Lihat
                   </button>
                 </td>
@@ -228,7 +222,7 @@ export default function PengajuanSayaSpoPage() {
 
       {/* Modal Pengajuan Baru */}
       <Modal open={modalOpen} onClose={() => setModalOpen(false)} title="Pengajuan SPO Baru" size="xl">
-        <form onSubmit={handleSubmit}>
+        <div>
 
           {/* Tab bar */}
           <div className="flex gap-1 mb-5 p-1 rounded-xl" style={{ background: 'var(--c-hover)' }}>
@@ -243,33 +237,20 @@ export default function PengajuanSayaSpoPage() {
                 onClick={() => setTab(i)}
                 className="flex-1 flex items-center justify-center gap-1.5 text-xs font-semibold py-2 rounded-lg transition-all cursor-pointer"
                 style={tab === i
-                  ? { background: 'var(--c-card)', color: '#F97316', boxShadow: 'var(--shadow-sm)' }
+                  ? { background: '#015c80', color: '#fff', boxShadow: 'var(--shadow-sm)' }
                   : { color: 'var(--c-text-muted)' }}
               >
                 {t.icon}
                 {t.label}
                 {t.badge ? (
                   <span className="text-xs font-bold px-1.5 py-0.5 rounded-full"
-                    style={{ background: '#F97316', color: '#fff', fontSize: '10px' }}>
+                    style={{ background: 'rgba(255,255,255,0.25)', color: '#fff', fontSize: '10px' }}>
                     {t.badge}
                   </span>
                 ) : null}
               </button>
             ))}
           </div>
-
-          {/* Template download */}
-          {templates.length > 0 && tab === 0 && (
-            <div className="rounded-lg p-3 flex flex-wrap gap-2 mb-4" style={{ background: 'var(--c-hover)', border: '1px solid var(--c-border)' }}>
-              <span className="text-xs text-ink-faint self-center">Template:</span>
-              {templates.map(t => (
-                <a key={t.id} href={t.file_path} target="_blank" rel="noreferrer"
-                  className="text-xs px-2 py-1 rounded" style={{ background: 'rgba(249,115,22,0.1)', color: '#F97316' }}>
-                  ↓ {t.nama_template}
-                </a>
-              ))}
-            </div>
-          )}
 
           {/* TAB 0 — Informasi Dokumen */}
           {tab === 0 && (
@@ -324,7 +305,7 @@ export default function PengajuanSayaSpoPage() {
                   <div className="flex items-center justify-between gap-3 px-4 py-3 rounded-xl border"
                     style={{ borderColor: 'var(--c-border)', background: 'var(--c-hover)' }}>
                     <div className="flex items-center gap-2">
-                      <FileText size={16} style={{ color: '#F97316' }} />
+                      <FileText size={16} style={{ color: '#015c80' }} />
                       <div>
                         <p className="text-sm font-medium text-ink">{file.name}</p>
                         <p className="text-xs text-ink-faint">{(file.size / 1024).toFixed(0)} KB</p>
@@ -341,10 +322,10 @@ export default function PengajuanSayaSpoPage() {
                     onDrop={e => { e.preventDefault(); setDragOver(false); if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]); }}
                     onClick={() => fileRef.current?.click()}
                     className="flex flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed cursor-pointer transition-all py-6"
-                    style={{ borderColor: dragOver ? '#F97316' : 'var(--c-border)', background: dragOver ? 'rgba(249,115,22,0.04)' : 'var(--c-hover)' }}
+                    style={{ borderColor: dragOver ? '#015c80' : 'var(--c-border)', background: dragOver ? 'rgba(1,92,128,0.04)' : 'var(--c-hover)' }}
                   >
-                    <UploadCloud size={22} style={{ color: dragOver ? '#F97316' : 'var(--c-text-faint)' }} />
-                    <p className="text-sm text-ink-muted">Drag & drop atau <span style={{ color: '#F97316' }} className="font-semibold">pilih file</span></p>
+                    <UploadCloud size={22} style={{ color: dragOver ? '#015c80' : 'var(--c-text-faint)' }} />
+                    <p className="text-sm text-ink-muted">Drag & drop atau <span style={{ color: '#015c80' }} className="font-semibold">pilih file</span></p>
                   </div>
                 )}
                 <input ref={fileRef} type="file" accept=".pdf,.doc,.docx" className="hidden"
@@ -378,7 +359,7 @@ export default function PengajuanSayaSpoPage() {
                 </div>
                 <div className="flex items-center gap-3">
                   <button type="button" onClick={selectAllHakAkses}
-                    className="text-xs font-medium transition-colors cursor-pointer" style={{ color: '#F97316' }}>
+                    className="text-xs font-medium transition-colors cursor-pointer" style={{ color: '#015c80' }}>
                     Pilih semua
                   </button>
                   {form.hak_akses.length > 0 && (
@@ -401,7 +382,7 @@ export default function PengajuanSayaSpoPage() {
                       onClick={() => toggleHakAkses(d.kode)}
                       className="text-xs px-2.5 py-1 rounded-full font-medium transition-all cursor-pointer"
                       style={active
-                        ? { background: '#F97316', color: '#fff', boxShadow: '0 2px 6px rgba(249,115,22,0.3)' }
+                        ? { background: '#015c80', color: '#fff', boxShadow: '0 2px 6px rgba(1,92,128,0.3)' }
                         : { background: 'var(--c-card)', color: 'var(--c-text-muted)', border: '1px solid var(--c-border)' }}
                     >
                       {d.kode}
@@ -435,10 +416,17 @@ export default function PengajuanSayaSpoPage() {
               {filteredKadiv.length === 0 ? (
                 <div className="py-8 text-center rounded-xl border" style={{ borderColor: 'var(--c-border)', background: 'var(--c-hover)' }}>
                   <p className="text-sm text-ink-faint">
-                    {form.hak_akses.length > 0
-                      ? 'Tidak ada Kadiv RS dari divisi yang dipilih. Coba pilih divisi lain di tab Hak Akses.'
-                      : 'Tidak ada Kadiv RS tersedia di RS Anda.'}
+                    {form.hak_akses.length === 0
+                      ? 'Pilih divisi di tab Hak Akses terlebih dahulu untuk menampilkan reviewer.'
+                      : 'Tidak ada Kadiv RS dari divisi yang dipilih. Coba pilih divisi lain di tab Hak Akses.'}
                   </p>
+                  {form.hak_akses.length === 0 && (
+                    <button type="button" onClick={() => setTab(1)}
+                      className="mt-3 text-xs font-semibold"
+                      style={{ color: '#015c80' }}>
+                      ← Ke tab Hak Akses
+                    </button>
+                  )}
                 </div>
               ) : (
                 <div className="rounded-xl border overflow-hidden" style={{ borderColor: 'var(--c-border)' }}>
@@ -454,7 +442,7 @@ export default function PengajuanSayaSpoPage() {
                           onClick={() => setGroupOpen(g => ({ ...g, [divNama]: !open }))}>
                           <span onClick={e => { e.stopPropagation(); toggleGroup(ids); }}>
                             {allSel
-                              ? <CheckSquare size={14} style={{ color: '#F97316' }} />
+                              ? <CheckSquare size={14} style={{ color: '#015c80' }} />
                               : <Square size={14} style={{ color: 'var(--c-text-faint)' }} />}
                           </span>
                           <span className="flex-1 text-left">{divNama}</span>
@@ -464,10 +452,10 @@ export default function PengajuanSayaSpoPage() {
                         {open && members.map(m => (
                           <label key={m.id} className="flex items-center gap-2.5 px-4 py-2.5 cursor-pointer"
                             style={{
-                              background: selected.includes(m.id) ? 'rgba(249,115,22,0.04)' : 'var(--c-card)',
+                              background: selected.includes(m.id) ? 'rgba(1,92,128,0.04)' : 'var(--c-card)',
                               borderBottom: '1px solid var(--c-border)',
                             }}>
-                            <input type="checkbox" checked={selected.includes(m.id)} onChange={() => toggleKadiv(m.id)} className="accent-orange-500" />
+                            <input type="checkbox" checked={selected.includes(m.id)} onChange={() => toggleKadiv(m.id)} className="accent-[#015c80]" />
                             <div>
                               <p className="text-xs font-medium text-ink">{m.nama}</p>
                               <p className="text-xs text-ink-faint">{m.email}</p>
@@ -492,14 +480,14 @@ export default function PengajuanSayaSpoPage() {
                 Lanjut →
               </button>
             ) : (
-              <button type="submit" disabled={saving}
+              <button type="button" onClick={handleSubmit} disabled={saving}
                 className="btn-primary"
                 style={{ opacity: saving ? 0.6 : 1 }}>
                 {saving ? 'Mengirim...' : 'Kirim Pengajuan'}
               </button>
             )}
           </div>
-        </form>
+        </div>
       </Modal>
     </div>
   );
