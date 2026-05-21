@@ -16,6 +16,11 @@ import PengajuanSayaPage      from './pages/formulir/PengajuanSayaPage';
 import ReviewDashboardPage    from './pages/formulir/ReviewDashboardPage';
 import DetailFormulirPage     from './pages/formulir/DetailFormulirPage';
 import DesignSubmitPage       from './pages/formulir/DesignSubmitPage';
+import PengajuanSayaSpoPage   from './pages/spo/PengajuanSayaSpoPage';
+import ReviewSpoPage          from './pages/spo/ReviewSpoPage';
+import ReleaseQueuePage       from './pages/spo/ReleaseQueuePage';
+import TemplateSpoPage        from './pages/spo/TemplateSpoPage';
+import DetailSpoPage          from './pages/spo/DetailSpoPage';
 
 function ProtectedRoute({ children, adminOnly = false }) {
   const { isAuthenticated, user } = useAuth();
@@ -78,6 +83,22 @@ export default function App() {
             } />
             <Route path="/formulir/:id/design" element={
               <ProtectedRoute><MainLayout><DesignSubmitPage /></MainLayout></ProtectedRoute>
+            } />
+
+            <Route path="/spo/pengajuan-saya" element={
+              <ProtectedRoute><MainLayout><PengajuanSayaSpoPage /></MainLayout></ProtectedRoute>
+            } />
+            <Route path="/spo/review" element={
+              <ProtectedRoute><MainLayout><ReviewSpoPage /></MainLayout></ProtectedRoute>
+            } />
+            <Route path="/spo/release-queue" element={
+              <ProtectedRoute><MainLayout><ReleaseQueuePage /></MainLayout></ProtectedRoute>
+            } />
+            <Route path="/spo/template" element={
+              <ProtectedRoute><MainLayout><TemplateSpoPage /></MainLayout></ProtectedRoute>
+            } />
+            <Route path="/spo/:id" element={
+              <ProtectedRoute><MainLayout><DetailSpoPage /></MainLayout></ProtectedRoute>
             } />
 
             <Route path="/"  element={<Navigate to="/dashboard" replace />} />

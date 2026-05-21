@@ -6,9 +6,10 @@ const getAll = async (req, res) => {
   try {
     const { search = '', divisi_id = '', pemilik = '', page = 1, limit = 10 } = req.query;
     const params = [];
+    // Hanya tampilkan dokumen Released (atau yg belum masuk workflow) — bukan SPO in-progress
     let where = req.user.role === 'admin'
-      ? "WHERE 1=1"
-      : "WHERE d.deleted_at IS NULL AND d.is_active = 1";
+      ? "WHERE (d.workflow_status IS NULL OR d.workflow_status = 'Released')"
+      : "WHERE d.deleted_at IS NULL AND d.is_active = 1 AND (d.workflow_status IS NULL OR d.workflow_status = 'Released')";
 
     // Non-admin: batasi ke divisi yang dimiliki user (user.divisi_id = angka, dokumen.divisi_id = kode)
     if (req.user.role !== 'admin' && req.user.divisi_id) {

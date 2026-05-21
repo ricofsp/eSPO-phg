@@ -70,4 +70,24 @@ export const formulirService = {
   submitDesign:    (id, fd)   => api.post(`/formulir/${id}/submit-design`, fd, { headers: { 'Content-Type': 'multipart/form-data' } }),
 };
 
+export const spoService = {
+  getAll:          (params)   => api.get('/spo-approval', { params }),
+  getOne:          (id)       => api.get(`/spo-approval/${id}`),
+  getPendingCount: ()         => api.get('/spo-approval/pending-count'),
+  getForReview:    ()         => api.get('/spo-approval/for-review'),
+  getReleaseQueue: ()         => api.get('/spo-approval/release-queue'),
+  getMySubmissions:()         => api.get('/spo-approval/my'),
+  getKadivRs:      (params)   => api.get('/spo-approval/kadiv-rs', { params }),
+  create:          (fd)       => api.post('/spo-approval', fd, { headers: { 'Content-Type': 'multipart/form-data' } }),
+  approve:         (id, data) => api.post(`/spo-approval/${id}/approve`, data),
+  reject:          (id, data) => api.post(`/spo-approval/${id}/reject`, data),
+  resubmit:        (id, fd)   => api.post(`/spo-approval/${id}/resubmit`, fd, { headers: { 'Content-Type': 'multipart/form-data' } }),
+  replaceFile:     (id, fd)   => api.post(`/spo-approval/${id}/replace`, fd, { headers: { 'Content-Type': 'multipart/form-data' } }),
+  release:         (id, data) => api.post(`/spo-approval/${id}/release`, data),
+  getTemplates:    ()         => api.get('/spo-approval/templates/list'),
+  createTemplate:  (fd)       => api.post('/spo-approval/templates', fd, { headers: { 'Content-Type': 'multipart/form-data' } }),
+  updateTemplate:  (id, data) => api.put(`/spo-approval/templates/${id}`, data),
+  deleteTemplate:  (id)       => api.delete(`/spo-approval/templates/${id}`),
+};
+
 export default api;

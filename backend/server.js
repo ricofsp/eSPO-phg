@@ -10,7 +10,8 @@ const documentRoutes= require('./src/routes/documents');
 const hospitalRoutes= require('./src/routes/hospitals');
 const divisionRoutes= require('./src/routes/divisions');
 const userRoutes    = require('./src/routes/users');
-const formulirRoutes= require('./src/routes/formulir');
+const formulirRoutes   = require('./src/routes/formulir');
+const spoApprovalRoutes= require('./src/routes/spoApproval');
 
 // Ensure upload directory exists
 const uploadDir = path.join(__dirname, 'public/uploads/documents');
@@ -40,7 +41,8 @@ app.use('/api/documents', auth, documentRoutes);
 app.use('/api/hospitals', auth, hospitalRoutes);
 app.use('/api/divisions', auth, divisionRoutes);
 app.use('/api/users',     auth, userRoutes);
-app.use('/api/formulir',  auth, formulirRoutes);
+app.use('/api/formulir',     auth, formulirRoutes);
+app.use('/api/spo-approval', auth, spoApprovalRoutes);
 
 app.use(errorHandler);
 

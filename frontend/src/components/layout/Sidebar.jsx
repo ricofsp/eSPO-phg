@@ -3,8 +3,12 @@ import {
   LayoutDashboard, FileText, Building2, GitBranch,
   Users, Settings, HelpCircle, ChevronLeft, ChevronRight,
   Hospital, ClipboardList, PlusSquare, ListChecks, CheckSquare,
+  FilePlus, Send, Eye, Archive, FolderOpen,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+
+const RS_ROLES = ['user','mutu_rs','kadiv','direktur_rs'];
+const REVIEW_ROLES = ['kadiv','direktur_rs','kadiv_corp','mutu_corp','ceo','admin'];
 
 const MENU_ALL = [
   {
@@ -12,6 +16,15 @@ const MENU_ALL = [
     items: [
       { icon: LayoutDashboard, label: 'Dashboard', path: '/dashboard' },
       { icon: FileText,        label: 'SPO',        path: '/documents' },
+    ],
+  },
+  {
+    label: 'SPO Approval',
+    items: [
+      { icon: Send,         label: 'Pengajuan Saya',   path: '/spo/pengajuan-saya',   roles: RS_ROLES },
+      { icon: CheckSquare,  label: 'Review & Approval',path: '/spo/review',           roles: REVIEW_ROLES },
+      { icon: ListChecks,   label: 'Rilis SPO',         path: '/spo/release-queue',    roles: ['mutu_corp','admin'] },
+      { icon: FolderOpen,   label: 'Template',         path: '/spo/template' },
     ],
   },
   {
@@ -139,9 +152,10 @@ export default function Sidebar({ collapsed, onToggle }) {
 
             <ul className="space-y-0.5">
               {section.items.map((item) => {
-                // Cek apakah sedang di halaman detail formulir (/formulir/<uuid>)
                 const isFormulirDetail = /^\/formulir\/[0-9a-f-]{30,}/.test(location.pathname);
                 const isReviewRole = ['mutu_rs','mutu_corp','design_corp','admin'].includes(userRole);
+                const isSpoDetail = /^\/spo\/[0-9]+$/.test(location.pathname);
+                const isSpoReviewRole = REVIEW_ROLES.includes(userRole);
 
                 const isActive = item.path && (
                   item.exact
@@ -151,6 +165,11 @@ export default function Sidebar({ collapsed, onToggle }) {
                   isFormulirDetail && (
                     (item.path === '/formulir/pengajuan-saya' && !isReviewRole) ||
                     (item.path === '/formulir/review' && isReviewRole)
+                  )
+                ) || (
+                  isSpoDetail && (
+                    (item.path === '/spo/pengajuan-saya' && !isSpoReviewRole) ||
+                    (item.path === '/spo/review' && isSpoReviewRole)
                   )
                 );
                 return (
