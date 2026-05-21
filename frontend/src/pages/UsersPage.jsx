@@ -82,8 +82,8 @@ export default function UsersPage() {
     if (!ids) return '-';
     const arr = ids.split(',').map(Number).filter(Boolean);
     if (!arr.length) return '-';
-    const names = arr.map((id) => divisions.find((d) => d.id === id)?.nama).filter(Boolean);
-    return names.length ? names.join(', ') : ids;
+    const kodes = arr.map((id) => divisions.find((d) => d.id === id)?.kode).filter(Boolean);
+    return kodes.length ? kodes.join(', ') : '-';
   };
 
   return (
@@ -108,6 +108,14 @@ export default function UsersPage() {
           <option value="">Semua Role</option>
           <option value="admin">Admin</option>
           <option value="user">User</option>
+          <option value="mutu_rs">Mutu RS</option>
+          <option value="mutu_corp">Mutu Corp</option>
+          <option value="design_corp">Design Corp</option>
+          <option value="kadiv">Kadiv</option>
+          <option value="direktur_rs">Direktur RS</option>
+          <option value="kadiv_corp">Kadiv Corp</option>
+          <option value="ceo">CEO</option>
+          <option value="corp_monitor">Corp Monitor</option>
         </select>
       </div>
 
@@ -143,7 +151,8 @@ export default function UsersPage() {
                 </td>
                 <td className="table-td text-ink-muted text-sm">{row.email}</td>
                 <td className="table-td">
-                  <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${row.role === 'admin' ? 'bg-[#7fb8cc] text-[#015c80]' : 'bg-blue-50 text-blue-600'}`}>
+                  <span className="text-xs px-2 py-0.5 rounded-full font-medium"
+                    style={{ background: 'var(--c-hover)', color: 'var(--c-text-muted)', border: '1px solid var(--c-border)' }}>
                     {row.role}
                   </span>
                 </td>
