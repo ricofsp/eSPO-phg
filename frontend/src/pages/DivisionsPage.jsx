@@ -56,7 +56,7 @@ export default function DivisionsPage() {
   const field = (key) => ({ value: form[key], onChange: (e) => setForm((f) => ({ ...f, [key]: e.target.value })) });
 
   return (
-    <div className="space-y-5 animate-fade-in">
+    <div className="space-y-3 animate-fade-in">
       <div className="flex items-start justify-between gap-4">
         <div>
           <h1 className="text-xl font-bold text-ink font-display">Divisi</h1>

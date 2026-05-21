@@ -54,4 +54,20 @@ export const userService = {
   remove:  (id)     => api.delete(`/users/${id}`),
 };
 
+export const formulirService = {
+  getAll:          (params)   => api.get('/formulir', { params }),
+  getOne:          (id)       => api.get(`/formulir/${id}`),
+  checkUnique:     (params)   => api.get('/formulir/check-unique', { params }),
+  getForReview:    ()         => api.get('/formulir/for-review'),
+  getMySubmissions:()         => api.get('/formulir/my-submissions'),
+  getKadivList:    (params)   => api.get('/formulir/kadiv-list', { params }),
+  getFiles:        (id)       => api.get(`/formulir/${id}/files`),
+  create:          (fd)       => api.post('/formulir', fd, { headers: { 'Content-Type': 'multipart/form-data' } }),
+  approve:         (id, data) => api.post(`/formulir/${id}/approve`, data),
+  reject:          (id, data) => api.post(`/formulir/${id}/reject`, data),
+  resubmit:        (id, fd)   => api.post(`/formulir/${id}/resubmit`, fd, { headers: { 'Content-Type': 'multipart/form-data' } }),
+  replaceDraft:    (id, fd)   => api.post(`/formulir/${id}/replace-draft`, fd, { headers: { 'Content-Type': 'multipart/form-data' } }),
+  submitDesign:    (id, fd)   => api.post(`/formulir/${id}/submit-design`, fd, { headers: { 'Content-Type': 'multipart/form-data' } }),
+};
+
 export default api;

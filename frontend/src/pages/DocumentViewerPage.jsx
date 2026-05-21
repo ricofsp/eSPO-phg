@@ -84,7 +84,7 @@ export default function DocumentViewerPage() {
   if (loading) return (
     <div className="min-h-screen flex items-center justify-center" style={{ background: bg }}>
       <div className="text-center">
-        <div className="w-10 h-10 border-2 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+        <div className="w-10 h-10 border-2 border-[#F97316] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
         <p className="text-sm" style={{ color: textMuted }}>Memuat dokumen...</p>
       </div>
     </div>
@@ -95,7 +95,7 @@ export default function DocumentViewerPage() {
       <div className="text-center">
         <FileText size={40} className="mx-auto mb-3" style={{ color: textMuted }} />
         <p className="font-medium mb-1" style={{ color: textMain }}>{error || 'File tidak tersedia'}</p>
-        <button onClick={() => window.close()} className="text-orange-500 text-sm mt-2 cursor-pointer hover:underline">
+        <button onClick={() => window.close()} className="text-[#F97316] text-sm mt-2 cursor-pointer hover:underline">
           Tutup Tab
         </button>
       </div>
@@ -188,7 +188,7 @@ export default function DocumentViewerPage() {
           onLoadError={() => setError('Gagal memuat file PDF')}
           loading={
             <div className="flex flex-col items-center gap-3 mt-20">
-              <div className="w-8 h-8 border-2 border-orange-500 border-t-transparent rounded-full animate-spin" />
+              <div className="w-8 h-8 border-2 border-[#F97316] border-t-transparent rounded-full animate-spin" />
               <p className="text-sm" style={{ color: textMuted }}>Memuat halaman...</p>
             </div>
           }

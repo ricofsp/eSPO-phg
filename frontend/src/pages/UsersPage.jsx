@@ -87,7 +87,7 @@ export default function UsersPage() {
   };
 
   return (
-    <div className="space-y-5 animate-fade-in">
+    <div className="space-y-3 animate-fade-in">
       <div className="flex items-start justify-between gap-4">
         <div>
           <h1 className="text-xl font-bold text-ink font-display">Pengguna</h1>
@@ -132,7 +132,7 @@ export default function UsersPage() {
               <tr key={row.id} className="table-row">
                 <td className="table-td">
                   <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs font-bold" style={{ background: 'linear-gradient(135deg, #F97316, #EA580C)' }}>
+                    <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs font-bold" style={{ background: 'linear-gradient(135deg, #F97316, #EA6B0C)' }}>
                       {row.nama?.[0]?.toUpperCase()}
                     </div>
                     <div>
@@ -143,7 +143,7 @@ export default function UsersPage() {
                 </td>
                 <td className="table-td text-ink-muted text-sm">{row.email}</td>
                 <td className="table-td">
-                  <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${row.role === 'admin' ? 'bg-orange-100 text-orange-700' : 'bg-blue-50 text-blue-600'}`}>
+                  <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${row.role === 'admin' ? 'bg-[#FED7AA] text-[#F97316]' : 'bg-blue-50 text-blue-600'}`}>
                     {row.role}
                   </span>
                 </td>

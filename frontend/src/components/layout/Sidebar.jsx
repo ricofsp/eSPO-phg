@@ -2,7 +2,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard, FileText, Building2, GitBranch,
   Users, Settings, HelpCircle, ChevronLeft, ChevronRight,
-  Hospital,
+  Hospital, ClipboardList, PlusSquare, ListChecks, CheckSquare,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
@@ -12,6 +12,14 @@ const MENU_ALL = [
     items: [
       { icon: LayoutDashboard, label: 'Dashboard', path: '/dashboard' },
       { icon: FileText,        label: 'SPO',        path: '/documents' },
+    ],
+  },
+  {
+    label: 'Formulir',
+    items: [
+      { icon: ClipboardList, label: 'Daftar Formulir',  path: '/formulir',                exact: true },
+      { icon: ListChecks,    label: 'Pengajuan',        path: '/formulir/pengajuan-saya', roles: ['user','kadiv'] },
+      { icon: CheckSquare,   label: 'Review & Approval',path: '/formulir/review',         roles: ['mutu_rs','mutu_corp','design_corp','admin'] },
     ],
   },
   {
@@ -43,8 +51,15 @@ export default function Sidebar({ collapsed, onToggle }) {
   const location   = useLocation();
   const { user }   = useAuth();
   const isAdmin    = user?.role === 'admin';
+  const userRole   = user?.role;
 
-  const MENU = MENU_ALL.filter((s) => !s.adminOnly || isAdmin);
+  const MENU = MENU_ALL
+    .filter((s) => !s.adminOnly || isAdmin)
+    .map((s) => ({
+      ...s,
+      items: s.items.filter((item) => !item.roles || item.roles.includes(userRole) || isAdmin),
+    }))
+    .filter((s) => s.items.length > 0);
 
   return (
     <aside
@@ -124,7 +139,20 @@ export default function Sidebar({ collapsed, onToggle }) {
 
             <ul className="space-y-0.5">
               {section.items.map((item) => {
-                const isActive = item.path && location.pathname.startsWith(item.path) && item.path !== '/';
+                // Cek apakah sedang di halaman detail formulir (/formulir/<uuid>)
+                const isFormulirDetail = /^\/formulir\/[0-9a-f-]{30,}/.test(location.pathname);
+                const isReviewRole = ['mutu_rs','mutu_corp','design_corp','admin'].includes(userRole);
+
+                const isActive = item.path && (
+                  item.exact
+                    ? location.pathname === item.path
+                    : location.pathname.startsWith(item.path) && item.path !== '/'
+                ) || (
+                  isFormulirDetail && (
+                    (item.path === '/formulir/pengajuan-saya' && !isReviewRole) ||
+                    (item.path === '/formulir/review' && isReviewRole)
+                  )
+                );
                 return (
                   <li key={item.label}>
                     <button
@@ -166,7 +194,7 @@ export default function Sidebar({ collapsed, onToggle }) {
         <div className="flex items-center gap-2">
           <div
             className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs font-bold"
-            style={{ background: 'linear-gradient(135deg, #F97316, #EA580C)' }}
+            style={{ background: 'linear-gradient(135deg, #F97316, #EA6B0C)' }}
           >
             {user?.nama?.[0]?.toUpperCase() || 'U'}
           </div>

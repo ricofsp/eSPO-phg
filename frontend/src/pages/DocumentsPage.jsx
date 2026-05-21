@@ -67,7 +67,7 @@ export default function DocumentsPage() {
   };
 
   return (
-    <div className="space-y-5 animate-fade-in">
+    <div className="space-y-3 animate-fade-in">
       {/* Header */}
       <div className="flex items-start justify-between gap-4">
         <div>

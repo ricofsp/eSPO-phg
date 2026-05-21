@@ -9,7 +9,13 @@ import HospitalsPage  from './pages/HospitalsPage';
 import DivisionsPage  from './pages/DivisionsPage';
 import UsersPage      from './pages/UsersPage';
 import LoginPage           from './pages/LoginPage';
-import DocumentViewerPage  from './pages/DocumentViewerPage';
+import DocumentViewerPage     from './pages/DocumentViewerPage';
+import DaftarFormulirPage     from './pages/formulir/DaftarFormulirPage';
+import PengajuanBaruPage      from './pages/formulir/PengajuanBaruPage';
+import PengajuanSayaPage      from './pages/formulir/PengajuanSayaPage';
+import ReviewDashboardPage    from './pages/formulir/ReviewDashboardPage';
+import DetailFormulirPage     from './pages/formulir/DetailFormulirPage';
+import DesignSubmitPage       from './pages/formulir/DesignSubmitPage';
 
 function ProtectedRoute({ children, adminOnly = false }) {
   const { isAuthenticated, user } = useAuth();
@@ -53,6 +59,25 @@ export default function App() {
 
             <Route path="/viewer/:id" element={
               <ProtectedRoute><DocumentViewerPage /></ProtectedRoute>
+            } />
+
+            <Route path="/formulir" element={
+              <ProtectedRoute><MainLayout><DaftarFormulirPage /></MainLayout></ProtectedRoute>
+            } />
+            <Route path="/formulir/baru" element={
+              <ProtectedRoute><MainLayout><PengajuanBaruPage /></MainLayout></ProtectedRoute>
+            } />
+            <Route path="/formulir/pengajuan-saya" element={
+              <ProtectedRoute><MainLayout><PengajuanSayaPage /></MainLayout></ProtectedRoute>
+            } />
+            <Route path="/formulir/review" element={
+              <ProtectedRoute><MainLayout><ReviewDashboardPage /></MainLayout></ProtectedRoute>
+            } />
+            <Route path="/formulir/:id" element={
+              <ProtectedRoute><MainLayout><DetailFormulirPage /></MainLayout></ProtectedRoute>
+            } />
+            <Route path="/formulir/:id/design" element={
+              <ProtectedRoute><MainLayout><DesignSubmitPage /></MainLayout></ProtectedRoute>
             } />
 
             <Route path="/"  element={<Navigate to="/dashboard" replace />} />

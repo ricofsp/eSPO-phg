@@ -8,15 +8,15 @@
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 :root {
   /* Backgrounds */
-  --c-bg:           #E8ECF1;   /* page bg — medium blue-gray, clearly different from white */
-  --c-surface:      #FFFFFF;   /* sidebar, header */
-  --c-card:         #FFFFFF;   /* cards, table */
-  --c-hover:        #F1F5F9;   /* hover state */
-  --c-hover-strong: #E2E8F0;   /* pressed / active-light */
+  --c-bg:           #F5F5F5;   /* page bg — neutral gray */
+  --c-surface:      #FFFFFF;
+  --c-card:         #FFFFFF;
+  --c-hover:        #F0F0F0;
+  --c-hover-strong: #E5E5E5;
 
   /* Borders */
-  --c-border:       #E2E8F0;   /* subtle border */
-  --c-border-hover: #CBD5E1;   /* hover border */
+  --c-border:       #E5E5E5;
+  --c-border-hover: #D4D4D4;
 
   /* Text — Slate-based */
   --c-text:         #0F172A;   /* heading / primary */
@@ -24,9 +24,9 @@
   --c-text-faint:   #94A3B8;   /* placeholder / hint */
 
   /* Elevation shadows */
-  --shadow-sm:  0 1px 2px rgba(15,23,42,0.06);
-  --shadow-md:  0 4px 12px rgba(15,23,42,0.08), 0 1px 3px rgba(15,23,42,0.06);
-  --shadow-lg:  0 16px 48px rgba(15,23,42,0.12), 0 4px 16px rgba(15,23,42,0.06);
+  --shadow-sm:  0 1px 3px rgba(15,23,42,0.10), 0 1px 2px rgba(15,23,42,0.08);
+  --shadow-md:  0 4px 12px rgba(15,23,42,0.12), 0 1px 3px rgba(15,23,42,0.08);
+  --shadow-lg:  0 16px 48px rgba(15,23,42,0.16), 0 4px 16px rgba(15,23,42,0.10);
 
   /* Header blur */
   --c-header-bg: rgba(255,255,255,0.92);
@@ -103,7 +103,7 @@ html.dark {
 
   /* ── Stat card ── */
   .stat-card {
-    @apply rounded-xl p-5 border transition-all duration-200 cursor-default;
+    @apply p-5 border transition-all duration-200 cursor-default;
     background-color: var(--c-card);
     border-color: var(--c-border);
     box-shadow: var(--shadow-sm);
@@ -116,7 +116,7 @@ html.dark {
 
   /* ── Input / Select / Textarea ── */
   .input-field {
-    @apply w-full rounded-lg px-3 py-2.5 text-sm
+    @apply w-full rounded px-3 py-2.5 text-sm
            focus:outline-none
            transition-all duration-150;
     background-color: var(--c-card);
@@ -129,7 +129,7 @@ html.dark {
 
   /* ── Buttons ── */
   .btn-primary {
-    @apply inline-flex items-center gap-2 text-sm font-semibold px-4 py-2.5 rounded-lg
+    @apply inline-flex items-center gap-2 text-sm font-semibold px-4 py-2.5 rounded
            transition-all duration-150 cursor-pointer select-none;
     background-color: #F97316;
     color: #FFFFFF;
@@ -144,7 +144,7 @@ html.dark {
   .btn-primary:disabled { opacity: 0.55; cursor: not-allowed; transform: none; box-shadow: none; }
 
   .btn-secondary {
-    @apply inline-flex items-center gap-2 text-sm font-medium px-4 py-2.5 rounded-lg
+    @apply inline-flex items-center gap-2 text-sm font-medium px-4 py-2.5 rounded
            border transition-all duration-150 cursor-pointer select-none;
     background-color: var(--c-card);
     border-color: var(--c-border);
@@ -217,4 +217,9 @@ html.dark {
     @apply px-4 py-3.5 text-sm;
     color: var(--c-text-muted);
   }
+}
+
+/* Hapus rounded dari semua card/panel — pertahankan rounded-full untuk circle */
+.rounded-xl, .rounded-2xl, .rounded-lg, .rounded-md {
+  border-radius: 0 !important;
 }

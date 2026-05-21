@@ -10,6 +10,7 @@ const documentRoutes= require('./src/routes/documents');
 const hospitalRoutes= require('./src/routes/hospitals');
 const divisionRoutes= require('./src/routes/divisions');
 const userRoutes    = require('./src/routes/users');
+const formulirRoutes= require('./src/routes/formulir');
 
 // Ensure upload directory exists
 const uploadDir = path.join(__dirname, 'public/uploads/documents');
@@ -24,6 +25,12 @@ app.use(express.json());
 // Static: serve uploaded PDFs
 app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 
+// Ensure formulir upload dirs
+['formulir/drafts','formulir/finals'].forEach(d => {
+  const p = path.join(__dirname, 'public/uploads', d);
+  if (!fs.existsSync(p)) fs.mkdirSync(p, { recursive: true });
+});
+
 // Public
 app.use('/api/auth',      authRoutes);
 app.get('/api/health', (_req, res) => res.json({ status: 'ok' }));
@@ -33,6 +40,7 @@ app.use('/api/documents', auth, documentRoutes);
 app.use('/api/hospitals', auth, hospitalRoutes);
 app.use('/api/divisions', auth, divisionRoutes);
 app.use('/api/users',     auth, userRoutes);
+app.use('/api/formulir',  auth, formulirRoutes);
 
 app.use(errorHandler);
 

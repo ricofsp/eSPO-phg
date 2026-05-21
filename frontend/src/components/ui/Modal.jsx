@@ -25,7 +25,7 @@ export default function Modal({ open, onClose, title, children, size = 'md' }) {
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
       <div
-        className={`w-full ${sizeClass} rounded-2xl animate-slide-up border`}
+        className={`w-full ${sizeClass} animate-slide-up border`}
         style={{
           background: 'var(--c-card)',
           borderColor: 'var(--c-border)',
