@@ -24,7 +24,7 @@ export default function MainLayout({ children }) {
         }}
       >
         <Header />
-        <main style={{ flex: 1, padding: '1.5rem', overflowY: 'auto', overflowX: 'auto' }}>
+        <main style={{ flex: 1, padding: '0.75rem 1rem', overflowY: 'auto', overflowX: 'auto' }}>
           {children}
         </main>
       </div>

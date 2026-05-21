@@ -113,10 +113,10 @@ export default function PengajuanSayaPage() {
   };
 
   return (
-    <div className="space-y-3 animate-fade-in">
+    <div className="space-y-3">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-xl font-bold text-ink font-display">Pengajuan</h1>
+          <h1 className="text-xl font-bold text-ink font-display">Formulir</h1>
           <p className="text-sm text-ink-muted mt-0.5">Pantau dan kelola pengajuan formulir Anda</p>
         </div>
         <div className="flex items-center gap-2">

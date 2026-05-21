@@ -10,6 +10,7 @@ import DivisionsPage  from './pages/DivisionsPage';
 import UsersPage      from './pages/UsersPage';
 import LoginPage           from './pages/LoginPage';
 import DocumentViewerPage     from './pages/DocumentViewerPage';
+import PengajuanPage          from './pages/PengajuanPage';
 import DaftarFormulirPage     from './pages/formulir/DaftarFormulirPage';
 import PengajuanBaruPage      from './pages/formulir/PengajuanBaruPage';
 import PengajuanSayaPage      from './pages/formulir/PengajuanSayaPage';
@@ -72,9 +73,7 @@ export default function App() {
             <Route path="/formulir/baru" element={
               <ProtectedRoute><MainLayout><PengajuanBaruPage /></MainLayout></ProtectedRoute>
             } />
-            <Route path="/formulir/pengajuan-saya" element={
-              <ProtectedRoute><MainLayout><PengajuanSayaPage /></MainLayout></ProtectedRoute>
-            } />
+            <Route path="/formulir/pengajuan-saya" element={<Navigate to="/pengajuan" replace />} />
             <Route path="/formulir/review" element={
               <ProtectedRoute><MainLayout><ReviewDashboardPage /></MainLayout></ProtectedRoute>
             } />
@@ -85,9 +84,10 @@ export default function App() {
               <ProtectedRoute><MainLayout><DesignSubmitPage /></MainLayout></ProtectedRoute>
             } />
 
-            <Route path="/spo/pengajuan-saya" element={
-              <ProtectedRoute><MainLayout><PengajuanSayaSpoPage /></MainLayout></ProtectedRoute>
+            <Route path="/pengajuan" element={
+              <ProtectedRoute><MainLayout><PengajuanPage /></MainLayout></ProtectedRoute>
             } />
+            <Route path="/spo/pengajuan-saya" element={<Navigate to="/pengajuan" replace />} />
             <Route path="/spo/review" element={
               <ProtectedRoute><MainLayout><ReviewSpoPage /></MainLayout></ProtectedRoute>
             } />

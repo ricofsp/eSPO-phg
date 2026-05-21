@@ -1,14 +1,15 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
-  LayoutDashboard, FileText, Building2, GitBranch,
+  LayoutDashboard, FileText, GitBranch,
   Users, Settings, HelpCircle, ChevronLeft, ChevronRight,
-  Hospital, ClipboardList, PlusSquare, ListChecks, CheckSquare,
-  FilePlus, Send, Eye, Archive, FolderOpen,
+  Hospital, ClipboardList, ListChecks, CheckSquare,
+  Send, FolderOpen, Inbox,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
-const RS_ROLES = ['user','mutu_rs','kadiv','direktur_rs'];
-const REVIEW_ROLES = ['kadiv','direktur_rs','kadiv_corp','mutu_corp','ceo','admin'];
+const RS_ROLES        = ['user','mutu_rs','kadiv','direktur_rs'];
+const REVIEW_ROLES    = ['kadiv','direktur_rs','kadiv_corp','mutu_corp','ceo','admin'];
+const FORMULIR_REVIEW = ['mutu_rs','mutu_corp','design_corp','admin'];
 
 const MENU_ALL = [
   {
@@ -16,31 +17,35 @@ const MENU_ALL = [
     items: [
       { icon: LayoutDashboard, label: 'Dashboard', path: '/dashboard' },
       { icon: FileText,        label: 'SPO',        path: '/documents' },
+      { icon: ClipboardList,   label: 'Formulir',   path: '/formulir', exact: true },
     ],
   },
   {
-    label: 'SPO Approval',
+    label: 'Pengajuan',
     items: [
-      { icon: Send,         label: 'Pengajuan Saya',   path: '/spo/pengajuan-saya',   roles: RS_ROLES },
-      { icon: CheckSquare,  label: 'Review & Approval',path: '/spo/review',           roles: REVIEW_ROLES },
-      { icon: ListChecks,   label: 'Rilis SPO',         path: '/spo/release-queue',    roles: ['mutu_corp','admin'] },
-      { icon: FolderOpen,   label: 'Template',         path: '/spo/template' },
+      { icon: Send, label: 'Pengajuan', path: '/pengajuan', roles: RS_ROLES },
     ],
   },
   {
-    label: 'Formulir',
+    label: 'Persetujuan',
     items: [
-      { icon: ClipboardList, label: 'Daftar Formulir',  path: '/formulir',                exact: true },
-      { icon: ListChecks,    label: 'Pengajuan',        path: '/formulir/pengajuan-saya', roles: ['user','kadiv'] },
-      { icon: CheckSquare,   label: 'Review & Approval',path: '/formulir/review',         roles: ['mutu_rs','mutu_corp','design_corp','admin'] },
+      { icon: CheckSquare, label: 'Review SPO',      path: '/spo/review',        roles: REVIEW_ROLES },
+      { icon: ListChecks,  label: 'Review Formulir', path: '/formulir/review',   roles: FORMULIR_REVIEW },
+      { icon: Inbox,       label: 'Rilis SPO',       path: '/spo/release-queue', roles: ['mutu_corp','admin'] },
+    ],
+  },
+  {
+    label: 'Referensi',
+    items: [
+      { icon: FolderOpen, label: 'Template SPO', path: '/spo/template' },
     ],
   },
   {
     label: 'Master Data',
     adminOnly: true,
     items: [
-      { icon: Hospital,   label: 'Rumah Sakit', path: '/hospitals' },
-      { icon: GitBranch,  label: 'Divisi',      path: '/divisions' },
+      { icon: Hospital,  label: 'Rumah Sakit', path: '/hospitals' },
+      { icon: GitBranch, label: 'Divisi',      path: '/divisions' },
     ],
   },
   {
@@ -48,13 +53,6 @@ const MENU_ALL = [
     adminOnly: true,
     items: [
       { icon: Users, label: 'Daftar Pengguna', path: '/users' },
-    ],
-  },
-  {
-    label: 'Pengaturan',
-    items: [
-      { icon: Settings,   label: 'Sistem',  path: '/settings', disabled: true },
-      { icon: HelpCircle, label: 'Bantuan', path: '/help',     disabled: true },
     ],
   },
 ];
@@ -153,23 +151,26 @@ export default function Sidebar({ collapsed, onToggle }) {
             <ul className="space-y-0.5">
               {section.items.map((item) => {
                 const isFormulirDetail = /^\/formulir\/[0-9a-f-]{30,}/.test(location.pathname);
-                const isReviewRole = ['mutu_rs','mutu_corp','design_corp','admin'].includes(userRole);
-                const isSpoDetail = /^\/spo\/[0-9]+$/.test(location.pathname);
-                const isSpoReviewRole = REVIEW_ROLES.includes(userRole);
+                const isFormulirReview = FORMULIR_REVIEW.includes(userRole);
+                const isSpoDetail      = /^\/spo\/[0-9]+$/.test(location.pathname);
+                const isSpoReview      = REVIEW_ROLES.includes(userRole);
+                const isRsRole         = RS_ROLES.includes(userRole);
 
-                const isActive = item.path && (
+                const isActive = !!(item.path && (
                   item.exact
                     ? location.pathname === item.path
                     : location.pathname.startsWith(item.path) && item.path !== '/'
-                ) || (
-                  isFormulirDetail && (
-                    (item.path === '/formulir/pengajuan-saya' && !isReviewRole) ||
-                    (item.path === '/formulir/review' && isReviewRole)
+                )) || (
+                  // SPO detail page: Pengajuan active for RS roles, Review SPO active for reviewers
+                  isSpoDetail && (
+                    (item.path === '/pengajuan'    && isRsRole && !isSpoReview) ||
+                    (item.path === '/spo/review'   && isSpoReview)
                   )
                 ) || (
-                  isSpoDetail && (
-                    (item.path === '/spo/pengajuan-saya' && !isSpoReviewRole) ||
-                    (item.path === '/spo/review' && isSpoReviewRole)
+                  // Formulir detail: Pengajuan active for submitters, Review Formulir active for reviewers
+                  isFormulirDetail && (
+                    (item.path === '/pengajuan'        && isRsRole && !isFormulirReview) ||
+                    (item.path === '/formulir/review'  && isFormulirReview)
                   )
                 );
                 return (

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, Eye, FileText, Filter, ExternalLink } from 'lucide-react';
+import { Search, Eye, FileText, Filter, ExternalLink, RefreshCw } from 'lucide-react';
 import { formulirService } from '../../services/api';
 import { divisionService, hospitalService } from '../../services/api';
 import { useAuth } from '../../context/AuthContext';
@@ -56,10 +56,13 @@ export default function DaftarFormulirPage() {
           <h1 className="text-xl font-bold text-ink font-display">Daftar Formulir</h1>
           <p className="text-sm text-ink-muted mt-0.5">Formulir yang telah dirilis dan tersedia</p>
         </div>
+        <button onClick={load} className="btn-secondary !px-3" title="Refresh">
+          <RefreshCw size={14} className={loading ? 'animate-spin' : ''} />
+        </button>
       </div>
 
       {/* Filter bar */}
-      <div className="flex flex-wrap items-center gap-3 p-4 rounded-xl border" style={{ background:'var(--c-card)', borderColor:'var(--c-border)' }}>
+      <div className="flex flex-wrap items-center gap-3 p-4 rounded-xl border" style={{ background:'var(--c-card)', borderColor:'var(--c-border)', boxShadow:'var(--shadow-sm)' }}>
         <div className="relative flex-1 min-w-[200px] max-w-sm">
           <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-faint pointer-events-none" />
           <input value={search} onChange={e => { setSearch(e.target.value); setPagination(p=>({...p,page:1})); }}
@@ -80,7 +83,7 @@ export default function DaftarFormulirPage() {
         </div>
       </div>
 
-      <div className="rounded-xl border overflow-hidden" style={{ background:'var(--c-card)', borderColor:'var(--c-border)' }}>
+      <div className="rounded-xl border overflow-hidden" style={{ background:'var(--c-card)', borderColor:'var(--c-border)', boxShadow:'var(--shadow-sm)' }}>
         <table className="w-full" style={{ minWidth: 700 }}>
           <thead>
             <tr style={{ background:'var(--c-hover)', borderBottom:'1px solid var(--c-border)' }}>
