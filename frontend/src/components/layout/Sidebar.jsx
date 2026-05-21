@@ -46,13 +46,7 @@ const MENU_ALL = [
     items: [
       { icon: Hospital,  label: 'Rumah Sakit', path: '/hospitals' },
       { icon: GitBranch, label: 'Divisi',      path: '/divisions' },
-    ],
-  },
-  {
-    label: 'Pengguna',
-    adminOnly: true,
-    items: [
-      { icon: Users, label: 'Daftar Pengguna', path: '/users' },
+      { icon: Users,     label: 'Users',       path: '/users' },
     ],
   },
 ];
@@ -82,13 +76,18 @@ export default function Sidebar({ collapsed, onToggle }) {
         transition: 'width 0.25s ease',
         background: 'var(--c-surface)',
         borderRight: '1px solid var(--c-border)',
+        boxShadow: '4px 0 20px rgba(15,23,42,0.08), 1px 0 4px rgba(15,23,42,0.05)',
         zIndex: 30,
       }}
     >
       {/* Logo */}
       <div
         className="flex items-center flex-shrink-0"
-        style={{ height: 56, padding: '0 14px', borderBottom: '1px solid var(--c-border)' }}
+        style={{
+          height: 56, padding: '0 14px',
+          borderBottom: '1px solid var(--c-border)',
+          background: 'linear-gradient(135deg, rgba(249,115,22,0.06) 0%, transparent 100%)',
+        }}
       >
         <div
           className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"

@@ -87,13 +87,16 @@ html.dark {
     @apply flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium
            cursor-pointer transition-all duration-150 w-full;
     color: var(--c-text-muted);
+    border-left: 2px solid transparent;
   }
   .sidebar-item:hover {
     background-color: var(--c-hover);
+    border-left-color: var(--c-border-hover);
     color: var(--c-text);
   }
   .sidebar-item.active {
     background-color: #F97316;
+    border-left-color: #EA6B0C;
     color: #FFFFFF;
   }
   .sidebar-item.active:hover {
